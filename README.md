@@ -1,5 +1,5 @@
 # This is an Application for manager Foregin Trade Bussiness prototype.
-<div style='text-align:center'>
+<div align="center">
     <img src='./public/logo.png'></img>
 </div>
 
