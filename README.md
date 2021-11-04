@@ -1,6 +1,7 @@
 # This is an Application for manager Foregin Trade Bussiness prototype.
 
 [![alt text](./public/logo.png "Link for Demo after download)](https://127.0.0.1:8080)
+[![alt text](./public/logo.png "Demo")](https://127.0.0.1:8080)
 
 > ## Modules Included 
     1 - Finance (Calc of invoices)
