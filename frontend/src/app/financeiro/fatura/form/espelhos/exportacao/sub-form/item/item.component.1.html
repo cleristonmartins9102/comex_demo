@@ -1,0 +1,66 @@
+<form [formGroup]="formulario">
+  <div class='wrap'>
+    <div style='margin-bottom: 5px'>
+      <span *ngIf="receiveData?.legenda" style='font-size: 12px' [ngStyle]="{'color': receiveData?.legenda.color}">{{receiveData.legenda.legenda}}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+      <div fxFlex="2" fxLayoutAlign="center center" *ngIf="!isLocked()">
+        <mat-icon class=' ico' matTooltip="Excluir" [id]="111" #delete (click)="onClose()" [ngClass]="{'deletar': false
+        }">delete</mat-icon>
+      </div>
+      <div fxFlex="30">
+        <mat-form-field style="width:100%">
+          <mat-select placeholder="Predicado Serviço" formControlName="id_predicado" #predicado
+            (selectionChange)='getDescricaoItem(predicado)' [disabled]="selectDisabled" required>
+            <mat-option [value]="item.id_predicado" [innerHTML]="item.nome" *ngFor="let item of predicados">
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="30">
+        <mat-form-field>
+          <input matInput placeholder='Descrição' formControlName='descricao' [readonly]='isLocked()'>
+        </mat-form-field>
+      </div>
+      <div fxFlex="7">
+        <mat-form-field>
+          <input matInput placeholder='Quantidade' formControlName='qtd' NumberOnlybd [readonly]='isLocked()'>
+        </mat-form-field>
+      </div>
+      <div fxFlex="5">
+        <mat-form-field>
+          <input matInput placeholder="Período" formControlName='periodo' NumberOnly [readonly]='isLocked()'/>
+        </mat-form-field>
+      </div>
+      <div fxFlex="10">
+        <mat-form-field>
+          <input matInput placeholder="Valor Unitário" formControlName='valor_unit' NumberOnly
+            [readonly]="isLocked()" currencyMask
+            [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" #currency #valorUnitario
+            (blur)="readOnly('valor_item') ? null : calcItem($event.target)" />
+        </mat-form-field>
+      </div>
+      <div fxFlex="10">
+        <mat-form-field>
+          <input matInput placeholder="Valor Item" formControlName='valor_item'
+            (blur)="readOnly('valor_item') ? null : changedItem()" [readonly]="isLocked()" NumberOnly
+            currencyMask [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" #currency
+            />
+        </mat-form-field>
+      </div>
+      <div [fxFlex]="formulario.get('descricao').value==='Impostos' ? 7 : 10" *ngIf="userNameCusto()">
+        <mat-form-field>
+          <input matInput placeholder="Valor Custo" formControlName='valor_custo' [ngStyle]="{color : isLocked() ? 'rgba(0,0,0,.6)' : 'black'}" (blur)="changedItem(formulario.get('descricao').value)" NumberOnly
+            currencyMask [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" #currency 
+            [readonly]='isLocked()'/>
+        </mat-form-field>
+      </div>
+      <div [fxFlex]="formulario.get('descricao').value==='Impostos' ? 3 : 0">
+        <mat-icon *ngIf="formulario.get('descricao').value==='Impostos'" class='ico_calc_imposto' (click)= 'unlock()' [ngStyle]="{ 'pointer-events' : ( faturaStatus === '2' ? 'none' : 'auto' ) }">{{locked ? 'lock' : 'lock_open'}}</mat-icon>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- <button (click)='show()'>SHOW</button> -->
+<!-- {{formulario.value | json}} -->
+<!-- <div>{{formattedMessage}}</div> -->

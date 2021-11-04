@@ -1,0 +1,164 @@
+export class ColumnsModel {
+  // Construindo colunas
+  columnsTablePrimary: Object[] =
+    [
+      {
+        nameView: 'nome',
+        nameDB: 'nome',
+        config: {
+          showInList: true,
+          showInFilter: true,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'number',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'tipo',
+        nameDB: 'tipo',
+        config: {
+          showInList: true,
+          showInFilter: true,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'number',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'classificação',
+        nameDB: 'classificacao',
+        config: {
+          showInList: true,
+          showInFilter: true,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'number',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'enquadramento',
+        nameDB: 'enquadramento',
+        config: {
+          showInList: true,
+          showInFilter: true,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'number',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'valor',
+        nameDB: 'valor',
+        config: {
+          showInList: true,
+          showInFilter: true,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'number',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+     {
+        nameView: 'criado em',
+        nameDB: 'created_at',
+        config: {
+          showInList: true,
+          showInFilter: false,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'date',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'data modificado',
+        nameDB: 'updated_at',
+        config: {
+          showInList: true,
+          showInFilter: false,
+          type: 'input',
+          style: [
+            'text-captalize'
+          ],
+          dataType: 'date',
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+      {
+        nameView: 'ações',
+        nameDB: 'acoes',
+        config: {
+          showInList: true,
+          showInFilter: false,
+          type: 'menu',
+          style: [
+            'text-captalize'
+          ],
+          condition: {
+            expression: (dados, column) => {
+              return false;
+            }
+          }
+        }
+      },
+    ];
+
+  columnsTableSecundary: Object = {
+    subTableWidth: 'description_md',
+    tables : []
+  };
+
+  getTablePrimary() {
+    return this.columnsTablePrimary;
+  }
+
+  getTableSecundary() {
+    return this.columnsTableSecundary;
+  }
+
+}
+

@@ -1,0 +1,58 @@
+<form [formGroup]="formulario">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+    <div fxFlex="2" fxLayoutAlign="center center">
+      <mat-icon class='ico' matTooltip="Excluir" [id]="111" #delete (click)="onClose()">delete</mat-icon>
+    </div>
+    <div fxFlex="20">
+      <mat-form-field style="width:100%">
+        <input matInput placeholder='Processo' required formControlName='descricao'>
+      </mat-form-field>
+    </div>
+    <div fxFlex="20">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder='CTE'
+          formControlName='cte'
+          required
+        >
+      </mat-form-field>
+    </div>
+    <div fxFlex="20">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder='Carro'
+          formControlName='carro'
+          required
+        >
+      </mat-form-field>
+    </div>
+    <div fxFlex="20">
+      <mat-form-field>
+        <input 
+          matInput
+          placeholder="Referência Empresa" 
+          formControlName='ref_empresa' 
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder="Valor Total" 
+          formControlName='valor_item' 
+          (keyup)='changedItem()' 
+          NumberOnly
+          currencyMask
+          [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" 
+          #currency
+          required
+      />
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<!-- <div>{{formattedMessage}}</div> -->

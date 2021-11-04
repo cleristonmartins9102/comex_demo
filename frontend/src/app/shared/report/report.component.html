@@ -1,0 +1,115 @@
+<div class="wrap_header">
+  <div class='menu_button'>
+    <button mat-stroked-button [innerHTML]="!filterActivated ? 'Filtro' : 'Cancelar'" (click)='activateFilter()'
+      class='menuButtonReport filterButtonReport'></button>
+    <button mat-stroked-button color="warn" class='menuButtonReport cancelarButtonReport' (click)='applyFilter(filter)'
+      *ngIf="filterActivated">Buscar</button>
+  </div>
+  <div class='title'>
+    <p [innerHTML]='title' color='primary'></p>
+  </div>
+  <div class='menu_report' style='width:100px'>
+    <img src="https://gralsin-img.s3.amazonaws.com/excel.png" width='80px' alt="" matTooltip='Extrair para excel' class='button'
+      (click)='download("excel")' *ngIf="type==='rel'">
+  </div>
+</div>
+<div class="mat-elevation-z8" style='position: relative'>
+  <div class='wrap_table'>
+    <table mat-table [dataSource]="data" multiTemplateDataRows matSort matSortActive="created_at"
+      matSortDisableClear=true>"
+      <ng-container [matColumnDef]="column.nameDB" *ngFor="let column of displayedColumnsList;">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]='!column.config.showInFilter'>
+          <div fxLayout="column" fxLayoutAlign="space-around start" style='padding-top: 10px'>
+            <div>
+              <p *ngIf="column.config.type!='checkbox'" [innerHTML]="column.nameView" [ngClass]='column.config.style'>
+              </p>
+            </div>
+            <app-arm-filter (click)="$event.stopPropagation()" [column]='column'
+              *ngIf="column.config.showInFilter && filterActivated" [fieldName]='column.nameDB'
+              (response)='addFilter($event)'></app-arm-filter>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="column.config.type!='checkbox' && dataHandleCheck(column.config, element[column.nameDB], element); then handledData else normalData"></div>
+          <ng-template #handledData>
+            <p (click)='clickEvent($event, column, element)' 
+               *ngFor="let data of dataHandled" 
+               [ngStyle]="checkHasStyle(column.config, data, element)"
+               [innerHTML]="column.config.dataType == 'date' ? (data | date: 'dd/MM/yyyy') : column.config.dataType == 'datetime' ? (data | date: 'dd/MM/yyyy hh:mm:ss') : column.config.dataType == 'coin' ? (data | currency:'BRL':true:'1.2-2') : data">
+            </p>
+          </ng-template>
+          <ng-template #normalData>
+            <p (click)='clickEvent($event, column, element)'
+               *ngIf="column.config.type!='checkbox'"
+               [ngClass]="column.config.style" class="upper"
+               [innerHTML]="column.config.dataType == 'date' ? (element[column.nameDB] | date: 'dd/MM/yyyy') : column.config.dataType == 'datetime' ? (element[column.nameDB] | date: 'dd/MM/yyyy hh:mm:ss') : column.config.dataType == 'coin' ? (element[column.nameDB] | currency:'BRL':true:'1.2-2') : element[column.nameDB]">
+            </p>
+          </ng-template>
+          <mat-icon class="icoTd" *ngIf='column.config.condition.icon'
+            [ngStyle]="{'color' : column.config.condition.expression(element, '')}">{{column.config.condition.icon}}
+          </mat-icon>
+          <mat-icon color="warn" class="icoTd"
+            *ngIf="column.config.condition.expression&&column.config.condition.type=='atention'?column.config.condition.expression(element, column):false"
+            [matTooltip]="column.config.tooltip">{{"notification_important"}}</mat-icon>
+          <div *ngIf="column.config.type=='menu'" class="vertical-align">
+            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #menu xPosition="before" yPosition="below">
+              <span *ngFor="let itemMenu of structure.menu">
+                <span>
+                  <span *ngIf="itemMenu?.children && itemMenu?.expression(element, this.authService.getUserLogged())">
+                    <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu" class="button_menu">
+                      {{itemMenu.displayName}}
+                    </button>
+                  </span>
+                  <span *ngIf="!itemMenu.children && itemMenu?.expression(element, this.authService.getUserLogged())">
+                    <button mat-menu-item color="primary" (click)="onContextMenuAction(itemMenu.event, element, $event)"
+                      [innerHTML]='checkTypeButtonEditOrQuery(itemMenu, element, this.authService.getUserLogged())'>
+                    </button>
+                  </span>
+                  <app-menu-item (menuResponse)="onContextMenuAction($event, element)" #menu
+                    [items]="{children:itemMenu.children, data: element}">
+                  </app-menu-item>
+                </span>
+              </span>
+            </mat-menu>
+
+          </div>
+          <div *ngIf="column.config.type=='eventos'" class="vertical-align">
+            <mat-chip-list style="display: inline-block">
+              <mat-chip style="background:#202124;color:#eee" matTooltip="Histórico"
+                (click)="openDialogHistorico(element)">H</mat-chip>
+            </mat-chip-list>
+            <span class="eventos_icon"
+              *ngFor="let evento of column.config.condition.expression(element);trackBy: trackByFn"
+              [matTooltip]='evento.matTooltip' [matTooltipClass]="tooltip" [ngStyle]="{'background': evento.color}"
+              [innerHTML]="evento.icon" style='cursor: pointer;'
+              (click)='redirectEventClick(evento.app, evento.module, element)'>
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsList.length">
+          <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="description_full">
+              <expansion-panel [subTableCol]="tableScundary" [subTableItens]="element.complementos">
+              </expansion-panel>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="rowTable; sticky: true"></tr>
+      <tr (contextmenu)="onContextMenu($event, element)" style="z-index:0" mat-row
+        *matRowDef="let element; columns: rowTable;" class="element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+  </div>
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"></mat-paginator>
+</div>

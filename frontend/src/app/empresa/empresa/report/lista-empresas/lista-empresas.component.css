@@ -1,0 +1,41 @@
+.header-blue {
+    background:#3b5998;
+}
+
+.tableList {
+    width:100%;
+}
+
+.img {
+    width: 100%;
+ }
+
+  .container {
+    min-height: 100%;
+    width: 100%;
+    /* background:red */
+  }
+
+  table {
+    width: 100%;height:100%
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .button-row button,
+.button-row a {
+  margin: 8px;
+  
+}
+.mat {
+  margin-top:80px
+}
+
+
+
+
+  
+

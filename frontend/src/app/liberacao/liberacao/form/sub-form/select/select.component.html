@@ -1,0 +1,37 @@
+<form [formGroup]="formulario">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+    <div fxFlex="2" fxLayoutAlign="center center">
+      <mat-icon class='ico' matTooltip="Excluir"  [id]="111" #delete (click)="onClose()">delete</mat-icon>
+    </div>
+    <div fxFlex="20">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Tipo de Documento"
+          formControlName="id_tipodocumento" 
+          #empresaSelected
+          [disabled]="selectDisabled || formEdit"
+        >
+          <mat-option [value]="tipodoc.id_tipodocumento" [innerHTML]="tipodoc.nome" *ngFor="let tipodoc of tiposdoc | async"></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <!-- <mat-form-field style="width:100%">
+        <mat-select placeholder="Email" 
+          formControlName="id_contato" 
+          (selectionChange)="emitForm()"
+          [disabled]="selectDisabled" 
+        >
+          <mat-option [value]="contato.id_contato" [innerHTML]="'(' + contato.nome + ') ' + contato.email" *ngFor="let contato of contatos | async"></mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <app-upload 
+        buttonLegend="Adicionar"
+        [fileInfo] = '{name: getNameUpload(receiveData)}'
+        (responseFileInfo)="receiveUploadInfo($event)"
+        [invite]="'liberacao/' + getTipoDocumentoNome(empresaSelected) | lowercase"
+        >
+      </app-upload>    
+    </div>
+  </div>
+</form>
+<!-- {{formulario.value | json}} -->

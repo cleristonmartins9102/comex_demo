@@ -1,0 +1,32 @@
+<div fxFlex="100%">
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [disabled]="isDisabled" [expanded]="setStep == 0" hideToggle *ngFor="let table of subTableCol.tables; let i = index">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <p [innerHTML]="table.subTableTitle"></p>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <p [innerHTML]="table.subTableDescription"></p>
+                    <mat-icon>{{table.ico}}</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table mat-table [dataSource]="dataSource[table.subTableTitle]" class="mat-elevation-z8">
+                <ng-container [matColumnDef]="column.nameDB" *ngFor="let column of table.buttons">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p [innerHTML]="column.nameView"></p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a href="http://{{addressDownload}}/garm/document/download/{{element[column.nameDB]}}">
+                            <i class="material-icons" *ngIf="column.config.type=='ico'" matTooltip="Download">{{column.config.icoName}}
+                            </i>
+                        </a>
+                        <!-- <p *ngIf="column.config.type!='ico'" [innerHTML]="column.config.dataType=='coin'&&checkTypeValue(element[column.nameDB])=='number'?(element[column.nameDB] | currency:'BRL'):column.config.dataType=='datetime'?(element[column.nameDB] | date:'dd/MM/yyyy hh:mm:ss'):element[column.nameDB]"></p> -->
+                        <p *ngIf="column.config.type!='ico'" [innerHTML]="column.config.dataType=='datetime' ? (element[column.nameDB] | date:'dd/MM/yyyy hh:mm:ss') : column.config.dataType=='date' ? (element[column.nameDB] | date:'dd/MM/yyyy') : element[column.nameDB]"></p>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="objFull[table.subTableTitle]"></tr>
+                <tr mat-row *matRowDef="let row; columns: objFull[table.subTableTitle]"></tr>
+            </table>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

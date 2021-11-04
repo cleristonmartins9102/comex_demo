@@ -1,0 +1,85 @@
+<form [formGroup]="formulario">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+    <div fxFlex="2" fxLayoutAlign="center center">
+      <mat-icon class='ico' matTooltip="Excluir" [id]="111" #delete (click)="onClose()">delete</mat-icon>
+    </div>
+    <div fxFlex="30">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Predicado Serviço" formControlName="id_predicado" #predicado (selectionChange)='getDescricaoItem(predicado)'
+          [disabled]="selectDisabled">
+          <mat-option [value]="item.id_predicado" [innerHTML]="item.nome" *ngFor="let item of itens">
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="30">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder='Descrição'
+          formControlName='descricao'
+          required
+        >
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <mat-select formControlName='id_moeda' placeholder='Moeda' #coin
+         required>
+          <mat-option 
+            [value]='moeda.id_moeda' 
+            [innerHTML]='moeda.moeda' 
+            *ngFor="let moeda of moedas"
+          ></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input 
+          matInput
+          #taxa
+          placeholder="Taxa" 
+          formControlName='taxa' 
+          NumberOnly
+          [readonly]='!coin.value'
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder="Valor" 
+          formControlName='valor_unit' 
+          NumberOnly
+          currencyMask
+          [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" 
+          #currency
+          [readonly]='!taxa.value'
+          #valor
+          (keyup)='calcValueTotal(valor.value, taxa.value)'
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input 
+          matInput 
+          placeholder="Valor Total" 
+          formControlName='valor_item' 
+          (focus)='changedItem()' 
+          NumberOnly
+          currencyMask
+          [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }" 
+          readonly
+          #currency
+          required
+      />
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<!-- <div>{{formattedMessage}}</div> -->

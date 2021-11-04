@@ -1,0 +1,102 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form [formGroup]="formulario" class='mat-elevation-z8' (ngSubmit)="onSubmite()">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Pacote</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field [hintLabel]="hintNomeItem">
+                                    <mat-select placeholder="Pacote" required formControlName="id_predicado" [disabled]='formEdit'>
+                                        <mat-option [value]="pacote.id_predicado" *ngFor="let pacote of listaPacotes" [innerHTML]="pacote.nome"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="formEdit">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Serviço
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Predicado e serviço do pacote
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div>
+                                <mat-divider></mat-divider>
+                                <div class="col-12 no-padding" formArrayName="predicados">
+                                    <div class="row" *ngFor="let item of getControl('predicados'); index as idx"
+                                        [formGroupName]="idx">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-1 no-padding" *ngIf="!formEdit">
+                                                    <mat-icon class='vertical-center ico' matTooltip="Excluir" [id]="idx"
+                                                        (click)="removePredicado($event.target.id)">delete</mat-icon>
+                                                </div>
+                                                <div class="col-11 no-padding">
+                                                    <mat-form-field>
+                                                        <input 
+                                                            matInput 
+                                                            placeholder="Nome do Item" 
+                                                            [errorStateMatcher]="errorMatcher"
+                                                            required
+                                                            formControlName="item"
+                                                            [readonly]='formEdit'
+                                                        >
+                                                        <!-- <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').errors?.required">
+                                                                Campo requerido.
+                                                            </mat-error>
+                                                            <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').status === 'PENDING'">
+                                                                Validando predicado.
+                                                            </mat-error>
+                                                            <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').errors?.minlength">
+                                                                Quantidade de caracteres incorreta.
+                                                            </mat-error>
+                                                            <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').hasError('predicadoFound')">
+                                                                Predicado já cadastrado.
+                                                            </mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Serviço" required formControlName="id_predicado" [disabled]='formEdit'>
+                                                    <mat-option 
+                                                        [value]="predicado.id_predicado" 
+                                                        *ngFor="let predicado of listaPredicados" 
+                                                        [innerHTML]="predicado.nome"
+                                                    >Importação</mat-option>
+                                                </mat-select>
+                                                <!-- <mat-error *ngIf="formulario.get('predicados').controls[idx].get('descricao').errors?.required">
+                                                    Campo é requerido.
+                                                </mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='ico_add' *ngIf="!formEdit">
+                                <mat-icon matTooltip="Adicionar predicado" (click)="addPredicado()">add_circle</mat-icon>
+                            </div>
+                        </mat-expansion-panel>
+
+                    </mat-accordion>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formEdit">SALVAR</button>
+                    <button mat-button (click)='backPage()'>CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</div>
+<!-- {{formulario.value | json}} -->
+<!-- <button (click)=" show()">FORMULARIO</button> -->

@@ -1,0 +1,49 @@
+    <div fxFlex="100%">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Cliente
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacões do Cliente
+                        <mat-icon>account_circle</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Operacão
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacões da Operacao
+                        <mat-icon>backup</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <input matInput placeholder="Country">
+                </mat-form-field>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Documentos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Informacões Documentais
+                        <mat-icon>date_range</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
+                </mat-form-field>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>

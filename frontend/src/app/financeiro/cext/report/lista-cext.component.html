@@ -1,0 +1,11 @@
+<div class="mat-elevation-z8">
+    <app-report 
+      methodSearch="getAll" 
+      [structure]="data" 
+      module="financeiro" 
+      appname="cext" 
+      (formResponse)="menuResponse($event)"
+      title='lista de custos extras'
+    >
+    </app-report>
+  </div>

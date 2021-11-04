@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="!destroy">
+  <div fxFlex='5%'>
+    <mat-icon (click)='selfDestroy()'>delete</mat-icon>
+  </div>
+  <form [formGroup]='formulario'>
+    <div fxFlex="50%">
+      <mat-form-field>
+        <mat-select placeholder='Tipo de Documento' #doc (selectionChange)='getNomeDocumento(doc)'
+          formControlName='id_tipodocumento' [disabled]='populateData.id_tipodocumento'>
+          <mat-option [id]="documento.nome" [value]="documento.id_tipodocumento"
+            *ngFor="let documento of tiposDocumentos" [innerHTML]='documento.nome | titlecase'>
+            ></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <app-upload
+        [btnEnabled]="doc.value || formulario.get('id_tipodocumento').value"
+        buttonLegend="Adicionar" 
+        [invite]='tipoDocumento' 
+        (responseFileInfo)='receiveFileInfo($event)'
+        [fileInfo]="{'name': populateData.nome_original }"
+      >
+      </app-upload>
+    </div>
+  </form>
+</div>
+
+<!-- {{formulario.value | json}} -->

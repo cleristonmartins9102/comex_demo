@@ -1,0 +1,11 @@
+<div class="mat-elevation-z8">
+    <app-report 
+      methodSearch="getAll" 
+      [structure]="data" 
+      module="financeiro/cadastro" 
+      appname="imposto" 
+      (formResponse)="menuResponse($event)"
+      title='lista de impostos'
+    >
+    </app-report>
+  </div>

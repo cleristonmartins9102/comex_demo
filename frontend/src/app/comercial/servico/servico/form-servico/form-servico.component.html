@@ -1,0 +1,97 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form [formGroup]="formulario" class='mat-elevation-z8'>
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Serviço</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field [hintLabel]="hintServico">
+                                    <input matInput placeholder="Nome do serviço." required formControlName="nome" [errorStateMatcher]="errorMatcher" [readonly]='formEdit'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="subFormClose" (click)="subFormClose=true">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Predicado
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Predicados do serviço
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div>
+                                <mat-divider></mat-divider>
+                                <div class="col-12 no-padding" formArrayName="predicados">
+                                    <div class="row" *ngFor="let item of getControl('predicados'); index as idx" [formGroupName]="idx">
+                                        <div class="col-6">
+                                            <div class="row" >
+                                                <div class="col-1 no-padding">
+                                                    <mat-icon class='vertical-center ico' [ngClass]="inUse(item) || formEdit ? 'whithout_ico' : 'ico'" matTooltip="Excluir" [id]="idx" (click)="removePredicado($event.target.id)">delete</mat-icon>
+                                                </div>
+                                                <div class="col-11 no-padding">
+                                                    <mat-form-field>
+                                                        <input matInput placeholder="Nome do predicado" [readonly]="inUse(item) || formEdit" formControlName="predicado" [errorStateMatcher]="errorMatcher" required >
+                                                        <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').errors?.required">
+                                                            Campo requerido.
+                                                        </mat-error>
+                                                        <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').status === 'PENDING'">
+                                                            Validando predicado.
+                                                        </mat-error>
+                                                        <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').errors?.minlength">
+                                                            Quantidade de caracteres incorreta.
+                                                        </mat-error>
+                                                        <mat-error *ngIf="formulario.get('predicados').controls[idx].get('predicado').hasError('predicadoFound')">
+                                                            Predicado já cadastrado.
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Descrição" formControlName="descricao" [errorStateMatcher]="errorMatcher" required [readonly]="inUse(item) || formEdit" >
+                                                <mat-error *ngIf="formulario.get('predicados').controls[idx].get('descricao').errors?.required">
+                                                    Campo é requerido.
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-2">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Regime" formControlName="id_regime" required [disabled]='formEdit'>
+                                                    <mat-option [value]="regime.id_regime" *ngFor="let regime of regimes" [innerHTML]='regime.legenda  | titlecase'>Importação</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="formulario.get('predicados').controls[idx].get('id_regime').errors?.required">
+                                                    Campo é requerido.
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='ico_add' *ngIf='!formEdit'>
+                                <mat-icon matTooltip="Adicionar predicado" (click)="addPredicado()">add_circle</mat-icon>
+                            </div>
+                        </mat-expansion-panel>
+
+                    </mat-accordion>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- {{formulario.value | json}} -->
+                    <button mat-button [disabled]="!formulario.valid || formEdit" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)='backPage()'>CANCELAR</button>
+
+                    <!-- <button (click)='show()'>Show</button> -->
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</div>
+        <!-- <button (click)=" show()">FORMULARIO</button> -->

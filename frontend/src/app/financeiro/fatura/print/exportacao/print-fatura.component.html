@@ -1,0 +1,145 @@
+<ng-template #espelho>
+  <div class="container_general">
+    <app-header></app-header>
+    <div class="header info">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan='3' style='text-align:center;font-size:20px;height:110px'>Exportação</td>
+          </tr>
+          <tr>
+            <td style='font-size:20px'><b>Fatura </b><span [innerHTML]="fatura?.numero"></span></td>
+            <td style='font-size:10px; text-decoration: underline'><b>Emissão </b><span
+                [innerHTML]="fatura?.dta_emissao | date: 'dd/MM/yyyy'"></span>
+            </td>
+            <td style='font-size:15px'><b>NF</b><span [innerHTML]="fatura?.nf"></span></td>
+          </tr>
+          <tr>
+            <td style='font-size:10px'><b>Valor Fatura </b><span
+                [innerHTML]="fatura?.valor | currency:'BRL':true:'1.2-2'"></span></td>
+            <td style='font-size:10px; text-decoration: underline'><b>Vencimento </b><span
+                [innerHTML]="fatura?.dta_vencimento | date: 'dd/MM/yyyy'"></span></td>
+            <td style='font-size:10px'><b>Despachante </b>{{fatura?.despachante_nome}}</td>
+          </tr>
+          <tr>
+            <td style='font-size:10px'></td>
+            <td style='font-size:10px'></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style='font-size:10px'><b>Cliente </b>{{fatura?.cliente_nome}}</td>
+            <td style='font-size:10px'><b>CNPJ </b>{{fatura?.cliente_cnpj}}</td>
+            <td style='font-size:10px'><b>Terminal </b><span [innerHTML]="fatura?.terminal_operacao"></span></td>
+          </tr>
+          <tr>
+            <td style='font-size:10px'><b>DUE </b>{{fatura?.due}}</td>
+            <td style='font-size:10px'><b>Valor Mercadoria </b><span
+              [innerHTML]="fatura?.valor_mercadoria | currency:'BRL':true:'1.2-2'"></span></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content">
+      <div class='itens'>
+        <table style='width:100%'>
+          <thead>
+            <tr>
+              <th>
+                Descrição
+              </th>
+              <th>
+                Quantidade
+              </th>
+              <th>
+                Periodo
+              </th>
+              <th>
+                Data Inicial
+              </th>
+              <th>
+                Data Final
+              </th>
+              <th>
+                Valor Unit.
+              </th>
+              <th>
+                Valor item.
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of itensDespesas">
+              <td [innerHTML]='item.descricao'></td>
+              <td [innerHTML]='item.qtd'></td>
+              <td [innerHTML]='item.periodo'></td>
+              <td [innerHTML]='item.dta_inicio | date: "dd/MM/yyyy"'></td>
+              <td [innerHTML]='item.dta_final | date: "dd/MM/yyyy"'></td>
+              <td [innerHTML]="item.valor_unit | currency:'BRL':true:'1.2-2'"></td>
+              <td [innerHTML]="item.valor_item | currency:'BRL':true:'1.2-2'"></td>
+            </tr>
+            <tr *ngIf="itensImpostos.length > 0">
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th [innerHTML]="fatura?.valor_despesa | currency: 'BRL':true:'1.2-2'"></th>
+            </tr>
+            <tr *ngFor="let item of itensImpostos">
+              <td [innerHTML]='item.descricao'></td>
+              <td [innerHTML]='item.qtd'></td>
+              <td [innerHTML]='item.periodo'></td>
+              <td [innerHTML]=''></td>
+              <td [innerHTML]=''></td>
+              <td [innerHTML]="item.valor_unit | currency:'BRL':true:'1.2-2'"></td>
+              <td [innerHTML]="item.valor_item | currency:'BRL':true:'1.2-2'"></td>
+            </tr>
+            <tr>
+              <th>{{totalLegend}}</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><span [innerHTML]="fatura?.valor | currency:'BRL':true:'1.2-2'"></span></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="containeres_general">
+        <div class="containeres">
+          <table class='table_general'>
+            <tbody>
+              <tr>
+                <th>Container 20</th>
+                <th>Container 40</th>
+              </tr>
+              <tr>
+                <td style='vertical-align: top; padding: 1px'>
+                  <table>
+                    <tr *ngFor="let container of faturaContaineres">
+                      <td *ngIf="container.dimensao==20">{{container.codigo }}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td style='vertical-align: top; padding: 1px'>
+                  <table>
+                    <tr *ngFor="let container of faturaContaineres">
+                      <td *ngIf="container.dimensao==40">{{container.codigo }}</td>
+                    </tr>
+                  </table>
+                </td>
+                <!-- <td>{{container.dimensao==20 ? container.codigo : null}}</td>
+            <td>{{container.dimensao==40 ? container.codigo : null}}</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

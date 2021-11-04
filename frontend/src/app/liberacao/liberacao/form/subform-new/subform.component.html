@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Documento
+      </mat-panel-title>
+      <mat-panel-description>
+        Documentos da Captação
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign="center center">
+      <div fxFlex="50%">
+        <app-select
+          *ngFor="let select of selects | async"
+          (notifyDestroy)='removeUploadDestroed($event)'
+          (sendFormulario)='receiveFormulario($event)'
+          [populateData]='select'
+          [tiposDocumentos]='tiposDocumentos'
+      ></app-select>
+      </div>
+      <div fxFlex="5%">
+        <mat-icon (click)='addDoc()' matTooltip='Adicionar Documento' style='cursor: pointer'>add_circle</mat-icon>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- <button (click)='change()'>show</button> -->
+<!-- {{documentos | json}} -->

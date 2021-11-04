@@ -1,0 +1,31 @@
+body, html {
+    height: 100%;
+    font-family: oxygen,Roboto Condensed,sans-serif,Arial;
+}
+
+/* mat-toolbar {
+    
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+} */
+/* dwd */
+
+.logout {
+    position: absolute;
+    top:4px;
+    right: 4px;
+    z-index: 1;
+    padding: 4px 25px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: #fff;
+    text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
+    background: #2d3436;
+    border: 1px solid #2d3436;
+    border-radius: 1px;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    /* -moz-box-shadow: inset 0 0 2px rgba(256,256,256,0.75); */
+    /* -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.75); */
+  }
+

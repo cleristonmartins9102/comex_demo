@@ -1,0 +1,60 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="50%">
+        <form class='mat-elevation-z8'>
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Porto</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Identificador' required >
+                                                <mat-option>Teste</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Nome Comum" required>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required>
+                                        <mat-option>Teste</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-button [disabled]="!formulario.valid" (click)="onSubmite()">SALVAR</button> -->
+                    <!-- <button mat-button (click)="onSubmite()">SALVAR</button> -->
+                    <!-- <button mat-button (click)="backPage()">CANCELAR</button> -->
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="openDialog()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="50%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Custo Extra</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Classificacao' required formControlName="id_cextclassificacao">
+                                        <mat-option [value]="classificacao.id_cextclassificacao"
+                                            *ngFor="let classificacao of classificacoes"
+                                            [innerHTML]="classificacao.classificacao | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Enquadramento' required formControlName="id_cextenquadramento">
+                                        <mat-option [value]="enquadramento.id_cextenquadramento"
+                                            *ngFor="let enquadramento of enquadramentos"
+                                            [innerHTML]="enquadramento.enquadramento | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Tipo' required #tipo formControlName="id_cexttipo" (selectionChange)='getImposto(tipo)'>
+                                        <mat-option [value]="tipo.id_cexttipo"
+                                            *ngFor="let tipo of tipos"
+                                            [innerHTML]="tipo.tipo | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select [placeholder]='placeholder' required formControlName="id_custo">
+                                        <mat-option [value]="custo.id_imposto"
+                                            *ngFor="let custo of custos"
+                                            [innerHTML]="custo.nome | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Custo' required formControlName="id_cexttipo">
+                                        <mat-option [value]="custo.id_imposto"
+                                            *ngFor="let custo of custos"
+                                            [innerHTML]="custo.nome | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Nome" required formControlName="nome">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Valor" required formControlName="valor">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName="status">
+                                        <mat-option [value]="status.id_status" *ngFor="let status of statusLista | async"
+                                            [innerHTML]="status.status | titlecase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- <sub-form 
+                      class="sub-form"
+                      [receiveDataForm]="subFormData" 
+                      (responseFormValue)="receivedDataSubForm($event)"
+                  >
+                  </sub-form> -->
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="openDialog()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+
+    </div>
+</div>

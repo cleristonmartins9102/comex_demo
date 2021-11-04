@@ -1,0 +1,13 @@
+<table *ngIf="hasOcorrencia">
+  <tr>
+    <td style='color:#524c61;font-size:16px;font-family:Source Sans Pro LIGHT,Arial,Helvetica,sans-serif'>
+      Divergência(s):
+    </td>
+  </tr>
+  <tr *ngFor="let ocorrencia of ocorrencias">
+    <td
+      style='padding: 0 10px;color:#524c61;font-size:16px;font-family:Source Sans Pro LIGHT,Arial,Helvetica,sans-serif'>
+      <mat-checkbox color='primary' [id]='ocorrencia.id_captacaohistorico' #check (click)='add(check)'></mat-checkbox><span style='margin-left: 5px; margin-bottom:3px'>{{ocorrencia.ocorrencia}}</span>
+    </td>
+  </tr>
+</table>

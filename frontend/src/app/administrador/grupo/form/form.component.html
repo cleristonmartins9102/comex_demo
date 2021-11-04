@@ -1,0 +1,46 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="100%">
+    <!-- <mat-progress-bar [value]="progresValue"></mat-progress-bar> -->
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Gerenciamento de Grupos de Acesso</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%">
+          <div fxFlex="50%" class='wrap_group' style='text-align: left'>
+            <mat-nav-list>
+              <mat-list-item *ngFor="let grupo of gruposAcesso" (click)='getGrupo(grupo.id_grupoacesso)'>
+                <app-grupo-acesso [receiveDataGrupo]="grupo"></app-grupo-acesso>
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
+          <div fxFlex="50%" class='wrap_permissions'>
+            <mat-nav-list #shoes>
+              <mat-list-item *ngFor="let membro of membros">
+                <app-grupo-acesso-membros-item [receiveDataMembro]="membro"></app-grupo-acesso-membros-item>
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
+        </div>
+        <div class="container subform" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+          fxLayoutAlign="center">
+          <div fxFlex="100%">
+            <app-sub-form-grupoacesso
+              [acessos]='acessos'
+              [aplicacoes]='aplicacoes'
+              (sendItens)=receiveItens($event)
+            ></app-sub-form-grupoacesso>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="onSubmite()">SALVAR</button>
+      </mat-card-actions>
+    </mat-card>
+    <button (click)="show()">show</button>
+    <!-- </form> -->
+    <!-- <input type="text" [(ngModel)]="numPredicados"> -->
+  </div>
+
+</div>
+{{formulario.value | json}}

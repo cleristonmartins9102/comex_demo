@@ -1,0 +1,11 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAll"
+    module="empresa"
+    [structure]="data" 
+    type='rel'
+    appname="grupodecontato" 
+    (formResponse)="menuResponse($event)"
+    title='relatório de grupos de contatos'
+  ></app-report>
+</div>

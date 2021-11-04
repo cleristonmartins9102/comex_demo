@@ -1,0 +1,13 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    subTableWidth="description_full"
+    methodSearch="getComum"
+    module="comercial" 
+    type='rel'
+    [structure]="data" 
+    appname="proposta" 
+    (formResponse)="menuResponse($event)"
+    title='relatório de propostas'
+  >
+  </app-report>
+</div>

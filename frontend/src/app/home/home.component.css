@@ -1,0 +1,147 @@
+    .container{
+        min-height:100vh;
+   
+    }
+
+    .row {
+        padding-top: 60px;
+    }
+
+    body {
+        overflow: hidden
+    }
+
+    .title {
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+    }
+
+    .appTitle {
+        padding: 130px 0;
+    }
+
+    div.geral {
+        position:relative;
+        height:100%;
+        overflow: hidden;
+        /* background: #0984e3; */
+    }
+
+    div.geral::after {
+        content: "";
+        background-image: url('https://gralsin-img.s3.amazonaws.com/sea_port.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.4;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;   
+      }
+
+    div.body {
+        height:100%;
+        background: url('/assets/img/bg_home.png');
+        background-repeat: repeat-x;
+    }  
+      
+
+    div.col div {
+        display: inline-block
+    }
+    
+    span.fin {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:96px;
+        height:96px;
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px -95px;
+        background-size: 96px;
+    }
+    span.empresa {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:96px;
+        height:96px;
+        /* background: red; */
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px 95px;
+        background-size: 96px;
+    }
+    span.comercial {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:96px;
+        height:96px;
+        /* background: red; */
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px -673px;
+        background-size: 96px;
+    }
+    span.captacao {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:96px;
+        height:96px;
+        /* background: red; */
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px -1938px;
+        background-size: 96px;
+    }
+    span.liberacao {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:96px;
+        height:96px;
+        /* background: red; */
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px -387px;
+        background-size: 96px;
+    }
+    
+    span.administracao {
+        display: inline-block;
+
+        cursor: pointer;
+
+        width:93px;
+        height:83px;
+        /* background: red; */
+        background-image: url("https://gralsin-img.s3.amazonaws.com/painel-icons.png"); 
+        background-position: 0px -2427px;
+        background-size: 96px;
+    }
+
+    span.legend {
+        display: block;
+        border-radius: 2px;
+        border-color: #F7F6F7;
+        font-size: 14px;
+        color: #333;
+        font-family: "Open Sans", sans-serif
+    }
+
+    .navbar-brand {
+        font-family: "Open Sans", sans-serif
+      }
+
+    .navbar {
+        background: #6A1B32;
+        color: #eee !important;
+    }
+
+   

@@ -1,0 +1,18 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAllTotal" 
+    [structure]="data" 
+    module="financeiro" 
+    appname="fatura" 
+    (formResponse)="menuResponse($event)"
+    title='lista de faturas totais'
+  >
+  </app-report>
+</div>
+
+<!-- <div>
+  <div #bodySolicitarBl>
+    <p>Prezados(as)</p>
+    <p>Identificamos os processos mencionados abaixo que tem previsão de atracação no dia.</p> 
+  </div>
+</div> -->

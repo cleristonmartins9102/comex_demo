@@ -1,0 +1,31 @@
+@page {
+  margin:0;
+}
+
+div.general {
+  /* width:35cm; */
+  margin:0 1cm;
+}
+
+@media print {
+  div.general {
+    margin:0 auto;
+  }
+}
+
+
+.header, .header-space, .footer, .footer-space { height: 100px; }
+.header { position: fixed; top: 0; }
+.footer { position: fixed; bottom: 0; }
+/* @media screen {
+  :host {
+    display: none;
+  }
+} */
+
+table {
+    width:100%;
+    table-layout: fixed;
+
+}
+

@@ -1,0 +1,140 @@
+label {
+    margin:0px;
+}
+mat-card {
+    padding:0 0 24px 0;
+}
+
+mat-card-content,
+mat-card-action {
+    padding:24px;
+}
+
+mat-card-header {
+    background:#3b5998;
+}
+
+.mat-card-title {
+    line-height: 34px;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px #333;
+}
+
+.card {
+    margin-top: 40px;
+}
+
+mat-card {    
+    /* max-width: 80%;     */
+    margin: 2em auto;    
+    text-align: center;    
+}    
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+
+  mat-radio-button {
+      margin-left:10px;
+  }
+
+  mat-radio-group{
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 2.125;
+    ;
+  }
+
+  .last {
+    margin-bottom:30px;
+  }
+
+  p{
+      margin:0;
+  }
+
+  .matFormContato {
+    position: relative;
+  }
+
+  .grupoContato {
+      margin-top: 2px;
+      background: #3b5998;
+      cursor: pointer;
+      width:60%;
+      display:inline-block;
+      z-index:1;
+      height: '13px';
+      position:relative;
+      overflow: hidden;
+      height: 21px;
+  }
+
+  .containerContactGroup {
+      top:39px;
+      position:absolute;
+      width:60%;
+      z-index:1;
+  }
+
+  .content_contatoGrupo {
+    background: white;
+    height: calc(100%-21px);
+}
+  .contatoInfo {
+    /* background: red; */
+    height: calc(100%-21px);
+}
+  
+  .expand_contato {
+      cursor: pointer;
+  }
+
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+    display: table-row;
+}
+
+.divTableRow:not(:last-of-type) > .divTableCell{
+    border-bottom: 1px solid #3b5998;
+}
+
+.divTableRow:first-of-type > .divTableCell{
+    font-weight: bold;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	display: table-cell;
+    padding: 3px 10px;
+    text-align: left;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+mat-radio-button {
+    color:primary;
+}

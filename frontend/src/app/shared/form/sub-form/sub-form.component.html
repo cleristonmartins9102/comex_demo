@@ -1,0 +1,64 @@
+<mat-expansion-panel [expanded]="checkTypeCall()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{receiveDataForm.title}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{receiveDataForm.descricao}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class='mat-expansion-content'>
+    <div class="row">
+      <div class="col-12">
+        <ng-container *ngTemplateOutlet="estimateTemplate">
+        </ng-container>
+      </div>
+    </div>
+    
+    <form [formGroup]="formulario">
+      <div class="col-12 no-padding" [formArrayName]="receiveDataForm.arrayName">
+        <div class="row" *ngFor="let item of getControl(receiveDataForm.arrayName); index as idx"
+          [formGroupName]="idx">
+          <div class="col-{{column.config.width}}" *ngFor="let column of columns; index as idxCol">
+            <div class="row">
+              <div class="col-1" *ngIf="( idxCol==0 && receiveDataForm?.deleteActivate ) || formEdit">
+                <mat-icon class='vertical-center ico' matTooltip="Excluir" [id]="idx" (click)="removeItem($event.target.id)">delete</mat-icon>
+              </div>
+              <div class="col-{{idxCol==0?11:12}}" [ngClass]="idxCol==0?'no-padding':''">
+                <mat-form-field *ngIf="column.type=='input'">
+                  <input matInput placeholder="{{column.placeholder}}" [formControlName]="column.config.element.formcontrolname"
+                    [required]="column.config.element.required&&subFormClose" [readonly]="formEdit">
+                </mat-form-field>
+                <mat-form-field *ngIf="column.type=='select'">
+                  <mat-select placeholder="{{column.placeholder}}" #selected formControlName="{{column.config.element.formcontrolname}}"
+                    [required]="column.config.element.required&&subFormClose" (selectionChange)="selectChange($event.value, column.generalname)"
+                    [disabled]="formEdit"
+                    >
+                    <mat-option [value]="options[getValueId(column)]" *ngFor="let options of (column.config.element.service?(column.config.element.option.values | async):(column.config.element.option.values)); trackBy: trackByFn">
+                      <p [innerHTML]="options[getLegend(column)]" [ngStyle]="getStyle(column)"></p>
+                    </mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+                <!-- <mat-select placeholder="dsdsd"> 
+                        <mat-option value="dsds" innerHTML="dsds"></mat-option>
+                        <mat-option value="dsds">dsds</mat-option>
+                      </mat-select> -->
+                <app-upload buttonLegend="Adicionar"
+                  invite='teste'
+                  [fileNameReceived]="item.controls['file_name'].value" [index]="idx"
+                  *ngIf="column.type=='upload'" 
+                  (responseFileInfo)="receiveUploadInfo($event)">
+                </app-upload>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='ico_add' *ngIf="receiveDataForm?.addActivate">
+    <mat-icon matTooltip="Adicionar" [ngStyle]="{'pointer-events': checkTypeCall() ? 'none' : 'auto'}" (click)="addItem()">add_circle</mat-icon>
+  </div>
+</mat-expansion-panel>

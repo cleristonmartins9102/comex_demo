@@ -1,0 +1,50 @@
+<div class="total">
+    <!--WRAPPER-->
+    <div id="wrapper">
+
+        <div class="user-icon" [@icon]="userIco"></div>
+        <div class="pass-icon" [@icon]="passIco"></div>
+        <form name="login-form" class="login-form" action="" method="post">
+
+            <!--HEADER-->
+            <div class="header">
+                <!--TITLE-->
+                <h1>Login de acesso</h1>
+                <!--END TITLE-->
+                <!--DESCRIPTION--><span>Preencha os dados abaixo para acessar os recursos disponiveis.</span>
+                <!--END DESCRIPTION-->
+            </div>
+            <!--END HEADER-->
+
+            <!--CONTENT-->
+            <div class="content">
+                <div>
+                    <input (focus)="userFocus()" (blur)="userBlur()" name="username" type="text" class="input username" value="Username" [(ngModel)]='username'
+                        onfocus="this.value=''" />
+                    <input (focus)="passFocus()" (blur)="passBlur()" name="password" type="password" class="input password" value="Password"
+                        [(ngModel)]='password' onfocus="this.value=''" />
+                </div>
+                <div class='error' *ngIf="error">
+                    <span class='error_text' [innerHTML]='error'></span>
+                </div>
+            </div>
+
+            <!--END CONTENT-->
+
+            <!--FOOTER-->
+            <div class="footer">
+                <!--LOGIN BUTTON--><input type="submit" (click)='login()' value="Login" class="button" />
+                <!--END LOGIN BUTTON-->
+            </div>
+            <!--END FOOTER-->
+
+        </form>
+        <!--END LOGIN FORM-->
+
+    </div>
+    <!--END WRAPPER-->
+
+    <!--GRADIENT-->
+    <div class="gradient"></div>
+    <!--END GRADIENT-->
+</div>

@@ -1,0 +1,10 @@
+<div class="wrap">
+  <div class='header'><span>Aplicação</span></div>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let app of aplicacoes as index; let idx=index" (click)='sendSelectedApp.emit(app)'>
+      <div>
+        <app-item [modulo]='app'></app-item>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

@@ -1,0 +1,21 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAll" 
+    [structure]="data" 
+    module="financeiro" 
+    appname="fatura" 
+    (formResponse)="menuResponse($event)"
+    title='lista de faturas'
+    (dataReceiveApi)='listeningDataApi($event)'
+  >
+  </app-report>
+</div>
+
+<!-- <form [formGroup]='formulario'>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp2" [readonly]="true" formControlName='filter' required>
+    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+    <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <button (click)='show()'>SHOWWWWW</button>
+</form> -->

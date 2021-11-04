@@ -1,0 +1,29 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="id_proposta || dataReceive">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Item
+      </mat-panel-title>
+      <mat-panel-description>
+        Itens da Fatura
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center">
+      <div fxFlex="100">  
+          <arm-item
+            *ngFor="let select of selects; let idx=index"
+            [id]="idx"
+            (sendItem)='changedItem()'
+            [id_proposta]='id_proposta'
+            (sendForm)="forkForm($event)"
+            [receiveData]="select.data"
+            (selfDestroy)="destroy($event)"
+          ></arm-item>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end end" >
+        <mat-icon matTooltip="Adicionar" (click)="addSelect()" class="ico">add_circle</mat-icon>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- {{documentos.value | json}} -->

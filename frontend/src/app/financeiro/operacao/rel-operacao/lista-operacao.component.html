@@ -1,0 +1,19 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAll" 
+    [structure]="data" 
+    type='rel'
+    module="operacao" 
+    appname="operacao" 
+    (formResponse)="menuResponse($event)"
+    title='Relatório de Operações'
+  >
+  </app-report>
+</div>
+
+<!-- <div>
+  <div #bodySolicitarBl>
+    <p>Prezados(as)</p>
+    <p>Identificamos os processos mencionados abaixo que tem previsão de atracação no dia.</p> 
+  </div>
+</div> -->

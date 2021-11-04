@@ -1,0 +1,164 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Processo</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Número" [readonly]="true"
+                                                formControlName="numero">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-container" *ngIf="isLote && !isDespacho">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Lote' required formControlName="id_captacaolote"
+                                                [disabled]="formEdit">
+                                                <mat-option
+                                                    *ngFor="let lote of lotes"
+                                                    [value]="lote.id_captacaolote" 
+                                                    [innerHTML]='lote.numero'>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-container" *ngIf="!isLote && !isDespacho">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Captacao' formControlName="id_captacao"
+                                                [disabled]="formEdit">
+                                                <mat-option [value]="captacao.id_captacao"
+                                                    *ngFor="let captacao of captacoes | async"
+                                                    [innerHTML]='captacao.numero + " - " + captacao.bl'>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-container" *ngIf="!isLote && isDespacho">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Despacho' required formControlName="id_despacho"
+                                                [disabled]="formEdit" >
+                                                <mat-option [value]="despacho.id_despacho"
+                                                    *ngFor="let despacho of despachos"
+                                                    [innerHTML]='despacho.numero + " - " + despacho.due'>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-4" *ngIf='!isLote'>
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder='Valor da Mercadoria' formControlName='valor_mercadoria'
+                                                NumberOnly (blur)="getItensPadroes()" currencyMask
+                                                >
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp1" placeholder="Data Início" [readonly]="true"
+                                         formControlName='dta_inicio'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp1 [disabled]='formEdit'></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp2" placeholder="Data Final" [readonly]="true"
+                                         formControlName='dta_final' [disabled]="itensLength() > 0" (dateChange)='getDay(true)'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                    <!-- <mat-datepicker #dp2 [disabled]="itensLength() > 0"></mat-datepicker> -->
+                                    <mat-datepicker #dp2 [disabled]="formEdit"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder='Dias Consumo' #diasConsumoInput disabled>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Fornecedor' required formControlName='id_fornecedor' [disabled]='formEdit'> 
+                                        <mat-option [value]='fornecedor.id_individuo' [innerHTML]='fornecedor.nome'
+                                            *ngFor="let fornecedor of fornecedores">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName='id_status' [disabled]='formEdit'> 
+                                        <mat-option [value]='status.id_processostatus' [innerHTML]='status.status'
+                                            *ngFor="let status of status | async">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="row" style="margin-top:10px">
+                        <div class="col-12">
+                            <app-sub-form class="sub-form" minimum="false" [receiveDataForm]="subFormDataDocumentos"
+                                (responseFormValue)="receivedDataSubFormDocumento($event)" [subFormClose]="formEdit">
+                            </app-sub-form>
+                        </div>
+                    </div> -->
+                    <div class="row" *ngFor="let captacao of lotesCollection" class='sub-form'>
+                        <div class="col-12">
+                            <app-sub-form-processo
+                                [dataReceive]='captacao'
+                                (sendForm)='receiveForm($event)'
+                                [data]='formulario'
+                                [formEdit]='formEdit'
+                                [regime]='regime'
+                            >                            >
+                            </app-sub-form-processo>
+                        </div>
+                    </div>
+                    <div class="row last">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                    <!-- <sub-form 
+                      class="sub-form"
+                      [receiveDataForm]="subFormData" 
+                      (responseFormValue)="receivedDataSubForm($event)"
+                  >
+                  </sub-form> -->
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formEdit" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="show()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+    </div>
+</div>

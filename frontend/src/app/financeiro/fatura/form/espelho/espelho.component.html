@@ -1,0 +1,56 @@
+<div class="container" fxLayout="row" style='width:2000px'  fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Fatura</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Modelo' required (selectionChange)='tipoFatura()'
+                                        formControlName='id_faturamodelo' [disabled]='formEdit'>
+                                        <mat-option [value]="modelo.id_faturamodelo" [innerHTML]='modelo.legend'
+                                            *ngFor="let modelo of modelos | async"
+                                            [disabled]="modelo.legend === 'Armazenagem' || modelo.legend === 'Exportação'">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="modeloTipo === 'arm'">
+                        <div class="col-6">
+                            <div class="form-container" style="margin-top:20px;text-align:left">
+                                <label for="" style="font-weight: bold">Comissões Ativadas</label>
+                                <mat-checkbox formControlName='comissao_despachante' [disabled]='!comissaoDespachanteCheckbox'>Despachante</mat-checkbox>
+                                <span *ngIf='!comissaoDespachanteCheckbox'> Despachante não cadastrado como comissionário.</span>
+                            </div>
+                        </div>
+                        <div class="col-6" *ngIf="statusFatura === '5'">
+                            <div class="form-container" style="margin-top:20px;text-align:left">
+                                <label for="" style="font-weight: bold">Recálculo</label>
+                                <mat-checkbox color='primary' formControlName='recalculo'>Ativado</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <app-form-fatura-espelho-arm></app-form-fatura-espelho-arm>
+                    <app-form-fatura-espelho-exp></app-form-fatura-espelho-exp>
+                    <app-form-fatura-espelho-notdebtrc></app-form-fatura-espelho-notdebtrc>
+                    <app-form-fatura-espelho-notdebagencia></app-form-fatura-espelho-notdebagencia>
+                    <ng-container [ngTemplateOutlet]="template"></ng-container>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-button [disabled]="!formulario.valid" (click)="onSubmite()">SALVAR</button> -->
+                    <!-- <button mat-button (click)="backPage()">CANCELAR</button> -->
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="show()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+    </div>
+</div>

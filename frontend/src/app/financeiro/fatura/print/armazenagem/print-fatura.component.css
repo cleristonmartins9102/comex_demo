@@ -1,0 +1,62 @@
+
+table, tr, tbody, thead {
+    width:100%;
+}
+
+td, th, tr {
+    font-size: 12px;
+}
+div.itens {
+    width:100%
+}
+
+div.itens th {
+    background: #ff9966
+}
+
+div.containeres_general {
+    margin-top:40px;
+    padding:25px 0;
+    border-top:1px solid  #cccccc;
+    border-bottom:1px solid  #cccccc;
+    /* width:23cm; */
+}
+
+div.containeres th {
+    background: #F5F5F5;
+}
+
+div.containeres {
+    margin:0 auto;
+    width: 400px;
+}
+
+div.containeres table.table_general {
+    border:1px solid #cccccc;
+    /* border-collapse:collapse; */
+}
+
+div.container_general {
+    width:100%;
+    display:block;
+}
+
+div.content {
+    margin-top:10px;
+}
+body {
+	line-height: 1;
+}
+
+* {
+    font-family: "Arial", sans-serif
+}
+
+td {
+    padding:0
+}
+
+.egend_fatura {
+   font-weight: bold;
+   font-size: 20px;
+}

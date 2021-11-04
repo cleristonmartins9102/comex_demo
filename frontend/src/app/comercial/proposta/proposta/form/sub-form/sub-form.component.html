@@ -1,0 +1,31 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{receiveDataForm.title}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{receiveDataForm.descricao}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class='mat-expansion-content'>
+    <div *ngFor="let item of select; index as idx" class='predicado_row'
+      style="padding:1.25em; display:relative">
+      <app-item-proposta
+        [predicados]='predicados'
+        [idx]='idx'
+        [appValor]='appValor'
+        [margens]='margens'
+        [depots]='depots'
+        [data]='item'
+        [remove]='remove(select, formulario)'
+        (outItem)='inItem($event)'
+      >
+    </app-item-proposta>
+    </div>
+  </div>
+  <div class='ico_add' *ngIf='!formEdit'>
+    <!-- <mat-icon matTooltip="Adicionar predicado" (click)="addPredicado()">add_circle</mat-icon> -->
+    <mat-icon matTooltip="Adicionar predicado" (click)="addItem()">add_circle</mat-icon>
+  </div>
+</mat-expansion-panel>
+<!-- {{formulario.value | json}} -->

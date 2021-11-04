@@ -1,0 +1,25 @@
+<!-- 
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top" id='frugalmap'>
+  <div class="col-md-12 navbar-header">
+    <img width=180 src="/assets/img/logo_ega_group.jpg" alt="" (click)='openHome()' style="cursor: pointer"> -->
+<!-- <img width=180 src="/assets/img/logo_g.png" alt="" (click)='openHome()' style="cursor: pointer"> -->
+<!-- </div>
+</div> -->
+<mat-toolbar color="primary" class='navWhole' [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
+  <mat-toolbar-row>
+    <div class='wrap_logo'>
+      <!-- <div style='line-height:55px'> -->
+        <!-- <img src="/assets/img/logo_ega_group.jpg" alt="" (click)='openHome()' style="cursor: pointer; width:100%"> -->
+        <img src="http://gralsin-img.s3.amazonaws.com/logo_g.png" alt="" (click)='openHome()' style="cursor: pointer; width:100%"> 
+      <!-- </div> -->
+    </div>
+    <div>
+      <nav-button [buttonsConfig]="btn" *ngFor="let btn of buttonsConfig"
+        (clickedEvent)='disable()'
+        [clicked]='notifyOffClicked'
+      >
+      </nav-button>
+    </div>
+   <app-logged></app-logged>
+  </mat-toolbar-row>
+</mat-toolbar>

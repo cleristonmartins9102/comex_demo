@@ -1,0 +1,96 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Grupo de Contato</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutGap="20px">
+                        <div class="form-container" fxFlex="48">
+                            <mat-form-field>
+                                <mat-select placeholder='Coadjuvante' required formControlName="coadjuvante"
+                                    #coadjuvante
+                                    [disabled]='formEdit'
+                                    (selectionChange)="adstrito.value ? loadGrupoContato(coadjuvante.value, adstrito.value) : null">
+                                    <mat-option [value]="empresa.id_individuo" *ngFor="let empresa of identificador"
+                                        [innerHTML]='empresa.id_individuo + " - " + empresa.nome'></mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-container" fxFlex="50">
+                            <mat-form-field>
+                                <mat-select placeholder='Importador' required formControlName="adstrito" #adstrito
+                                    (selectionChange)="loadGrupoContato(coadjuvante.value, adstrito.value)"
+                                    [disabled]='formEdit'>
+                                    <mat-option [value]="empresa.id_individuo" *ngFor="let empresa of identificador"
+                                        [innerHTML]='empresa.id_individuo + " - " + empresa.nome'></mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- <mat-list>
+                        <mat-icon matTooltip="Criar novo grupo" (click)="addItem()" style="margin-left:96%;cursor: pointer"
+                            *ngIf="!formulario.get('coadjuvante').errors&&!formulario.get('adstrito').errors">add_circle</mat-icon>
+                        <h3 mat-subheader>Grupo(s) da empresa</h3>
+                        <mat-list-item #grupoContatoEl (click)="disableEvent($event)" style="width:auto;z-index:0" [style]="!grupo.erro?'cursor:pointer':'pointer-events:none'" (click)="setCurrentGroup(grupoContatoEl)"
+                            [id]="grupo.id_grupodecontato" *ngFor="let grupo of grupos | async">
+                            <mat-icon style="z-index:1" matTooltip="Excluir" (click)="removeGrupo($event)"
+                                style="width:auto;z-index:99999"  *ngIf="!grupo.erro">delete</mat-icon>
+                            <mat-icon mat-list-icon>group</mat-icon>
+                            <h4 mat-line [innerHTML]="grupo.nome"></h4>
+                        </mat-list-item>
+                        <mat-list-item *ngFor="let item of field">
+                            <mat-form-field>
+                                <mat-select placeholder="Nome do Grupo" formControlName="nome_grupo">
+                                    <mat-option [value]="grupoN.id_grupodecontatonome" *ngFor="let grupoN of nomesGruposPadroes | async"
+                                        [innerHTML]="grupoN.nome">Nome do Grupo</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list> -->
+                    <mat-nav-list>
+                        <mat-icon matTooltip="Criar novo grupo" (click)="addItem()"
+                            style="margin-left:96%;cursor: pointer"
+                            *ngIf="(!formulario.get('coadjuvante').errors&&!formulario.get('adstrito').errors) && !isLocked()">add_circle
+                        </mat-icon>
+                        <h3 mat-subheader>Grupo(s) da empresa</h3>
+                        <mat-list-item #grupoContatoEl style="width:auto;z-index:0"
+                            [ngStyle]="{ 'cursor:pointer' : !grupo.erro ? 'pointer' : 'none', 'pointer-events' : formEdit ? 'none' : 'auto' }"
+                            (click)="setCurrentGroup(grupoContatoEl)" [id]="grupo.id_grupodecontato"
+                            *ngFor="let grupo of grupos | async">
+                            <button mat-icon-button (click)="removeGrupo($event, grupo)">
+                                <mat-icon style="z-index:1" matTooltip="Excluir"
+                                    style="width:auto;z-index:99999" *ngIf="!grupo.erro">delete</mat-icon>
+                            </button>
+                            <mat-icon mat-list-icon>group</mat-icon>
+                            <h4 mat-line [innerHTML]="grupo.nome"></h4>
+                        </mat-list-item>
+                        <mat-list-item *ngFor="let item of field">
+                            <mat-form-field>
+                                <mat-select placeholder="Nome do Grupo" formControlName="nome_grupo">
+                                    <mat-option [value]="grupoN.id_grupodecontatonome"
+                                        *ngFor="let grupoN of nomesGruposPadroes" [innerHTML]="grupoN.nome">Nome
+                                        do Grupo</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-nav-list>
+                    <app-sub-form-contato (sendForm)="forkForm($event)" [loadContatos]="contatosDoGrupo"
+                        [expanded]="subFormExpanded" [selectTotal]="subFormReset" [grupoNome]="grupoNome"
+                        [disabled]='!grupoSelected'>
+                    </app-sub-form-contato>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formEdit" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="cleanSubForm()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+    </div>
+</div>

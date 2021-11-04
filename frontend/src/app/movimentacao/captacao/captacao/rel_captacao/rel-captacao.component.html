@@ -1,0 +1,20 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAll" 
+    [structure]="data" 
+    module="captacao" 
+    appname="captacao"
+    type='rel'
+    (formResponse)="menuResponse($event)"
+    title='relatório de captação'
+    (dataReceiveApi)='listeningDataApi($event)'
+  >
+  </app-report>
+</div>
+
+<!-- <div>
+  <div #bodySolicitarBl>
+    <p>Prezados(as)</p>
+    <p>Identificamos os processos mencionados abaixo que tem previsão de atracação no dia.</p> 
+  </div>
+</div> -->

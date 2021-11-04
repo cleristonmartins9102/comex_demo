@@ -1,0 +1,14 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAllCapMon"
+    method='mon'
+    [structure]="data" 
+    module="movimentacao" 
+    appname="captacao" 
+    (formResponse)="menuResponse($event)"
+    title='lista de captações monitoradas'
+    [hideRowEvent]='false'
+    (dataReceiveApi)='listeningDataApi($event)'
+  >
+  </app-report>
+</div>

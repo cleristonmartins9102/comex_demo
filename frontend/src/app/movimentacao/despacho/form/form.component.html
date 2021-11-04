@@ -1,0 +1,183 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Despacho</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6" *ngIf="formEdit || formView">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Número" [readonly]="true"
+                                                formControlName="numero">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-{{formEdit?6:12}}">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Proposta' required formControlName="id_proposta"
+                                                [disabled]="formEdit">
+                                                <mat-option [value]="proposta.id_proposta"
+                                                    *ngFor="let proposta of propostas"
+                                                    [innerHTML]='proposta.nome_cliente + " - " + proposta.numero + proposta.regime_classificacao | titlecase'>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="DUE" formControlName="due" [readonly]='formEdit'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder='BL' formControlName='bl' [readonly]='formEdit'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field>
+                                <input matInput placeholder='Referência Gralsin' formControlName='ref_interna' required/>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field>
+                                <mat-select placeholder='Despachante' formControlName='id_despachante'
+                                    [disabled]='formEdit'>
+                                    <mat-option [value]="despachante.id_individuo"
+                                        *ngFor="let despachante of despachantes" [innerHTML]='despachante.nome'>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Terminal de Operações'
+                                        formControlName="id_terminal_operacao" [disabled]="formEdit">
+                                        <mat-option [value]="terminal.id_terminal"
+                                            *ngFor="let terminal of terminais | async"
+                                            [innerHTML]="terminal.terminal_nome | uppercase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Terminal Destino' formControlName="id_terminal_destino"
+                                        [disabled]="formEdit">
+                                        <mat-option [value]="terminal.id_terminal"
+                                            *ngFor="let terminal of terminais | async"
+                                            [innerHTML]="terminal.terminal_nome | uppercase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Depot' required formControlName="id_depot"
+                                        [disabled]="formEdit" (selectionChange)='depotChanged()'>
+                                        <mat-option></mat-option>
+                                        <mat-option [value]="depot.id_depot" *ngFor="let depot of depots"
+                                            [innerHTML]="depot.nome">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName="id_status"
+                                        [disabled]="formEdit">
+                                        <mat-option [value]="status.id_despachostatus"
+                                            *ngFor="let status of statusLista | async" [innerHTML]="status.status">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-container">
+                                <label for="" style="font-weight: bold">Margem</label>
+                                <mat-radio-group formControlName="id_margem" required>
+                                    <mat-radio-button [value]="margem.id_margem" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}"
+                                        *ngFor='let margem of margens'>{{margem.margem}}
+                                    </mat-radio-button>
+                                    <!-- <mat-radio-button value='null' color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}">Nenhuma
+                                    </mat-radio-button> -->
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-container">
+                                <label for="" style="font-weight: bold">IMO</label>
+                                <mat-radio-group formControlName="imo">
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}">Sim
+                                    </mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-sub-form class="sub-form" minimum="false" [receiveDataForm]="subFormDataContainer"
+                                (responseFormValue)="receivedDataSubFormContainer($event)" [subFormClose]="formEdit"
+                                [formEdit]='formEdit'>
+                            </app-sub-form>
+                        </div>
+                    </div>
+                    <!-- <div class="row" style="margin-top:10px">
+                        <div class="col-12">
+                            <app-sub-form class="sub-form" minimum="false" [receiveDataForm]="subFormDataDocumentos"
+                                (responseFormValue)="receivedDataSubFormDocumento($event)" [subFormClose]="formEdit" [typeCall]="checkTypeCall()">
+                            </app-sub-form>
+                        </div>
+                    </div>  -->
+                    <div class="row last">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formView" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()" [disabled]="formView">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="show()">Show FOrm</button> -->
+    </div>
+</div>
+<!-- {{formulario | json}} -->

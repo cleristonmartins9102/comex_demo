@@ -1,0 +1,5 @@
+<div class="btn_aceite" [ngStyle]="{'width': fileInfo.name ? '100%' : '100px'}">
+    <button mat-raised-button (click)="openUploadDialog()" *ngIf="checkFileNameFound() && btnEnabled">{{buttonLegend}}</button>
+    <span [innerHTML]="fileInfo.name"></span>
+</div>
+

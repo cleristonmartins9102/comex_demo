@@ -1,0 +1,27 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Break Bulk
+      </mat-panel-title>
+      <mat-panel-description>
+        Informações da Carga
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]="formulario">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+        <div fxFlex="40">
+          <mat-form-field>
+            <input matInput placeholder='Peso Bruto' formControlName='pesoBruto' NumberOnly required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="40">
+            <mat-form-field>
+                <input matInput placeholder='Metro Cúbico' formControlName='metroCubico' NumberOnly required>
+              </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- {{formulario.value | json}} -->

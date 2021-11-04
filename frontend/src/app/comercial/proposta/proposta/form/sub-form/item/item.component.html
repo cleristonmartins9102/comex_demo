@@ -1,0 +1,122 @@
+<form [formGroup]="formulario">
+  <div class="col-12 no-padding">
+    <div>
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field>
+            <mat-select placeholder="Predicado Serviço" #seletor formControlName="nome" [disabled]='formEdit'
+              (selectionChange)="selecionarDescricaoPredicado(seletor.value, idx)" required>
+              <mat-option [id]="predicado.nome" *ngFor="let predicado of listaPredicados"
+                [value]="predicado.id_predicado" [innerHTML]="predicado.nome"></mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input matInput placeholder="Descrição" #descricao formControlName="descricao" required
+              [readonly]='formEdit'>
+          </mat-form-field>
+        </div>
+        <div class="col-1">
+          <mat-form-field>
+            <input matInput placeholder="Período Dias" NumberOnly formControlName="franquia_periodo"
+              matTooltip="Período em dias, preencher quando aplicável" [readonly]='formEdit'>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field>
+            <mat-select placeholder="Dimensão" formControlName="dimensao" matTooltip="Preencher quando aplicável"
+              [disabled]='formEdit'>
+              <mat-option value='20'>20</mat-option>
+              <mat-option value='40'>40</mat-option>
+              <mat-option value='ambos'>Ambos</mat-option>
+              <mat-option value='n.a'>Nenhum</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field>
+            <mat-select placeholder="Aplicação Valor" formControlName="aplicacao_valor" required [disabled]='formEdit'>
+              <mat-option *ngFor="let apValor of appValor" [value]="apValor.id_predproappvalor"
+                [innerHTML]="apValor.nome | titlecase">
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field>
+            <mat-select placeholder="Unidade Cobrado" formControlName="unidade" required [disabled]='formEdit'>
+              <mat-option value='Moeda'>Moeda</mat-option>
+              <mat-option value='% Valor'>% Valor</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-2">
+          <mat-form-field>
+            <input matInput placeholder="Valor Mínimo" NumberOnly formControlName="valor_minimo" currencyMask
+              matTooltip="Preencher quando aplicável" [disabled]='formEdit'>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field>
+            <input matInput placeholder="Valor Máximo" NumberOnly formControlName="valor_maximo" currencyMask
+              matTooltip="Preencher quando aplicável" [disabled]='formEdit'>
+          </mat-form-field>
+        </div>
+        <div class="col-1">
+          <mat-form-field>
+            <input matInput placeholder="Valor Acima" NumberOnly formControlName="valor_partir" currencyMask
+              matTooltip="Preencher quando aplicável" [disabled]='formEdit'>
+          </mat-form-field>
+        </div>
+
+        <div class="col-1" style="position:relative;">
+          <label style="font-size: 9px;position:absolute;top:-15px;margin-left:-1px">Valor</label>
+          <mat-checkbox color="primary" (change)="setValSobConsulta(idx)"
+            [ngStyle]="{'mouse-event': formEdit ? 'none' : 'auto' }" formControlName="tipo_valor" [disabled]='formEdit'>
+          </mat-checkbox>
+          <label style="font-size: 9px;position:absolute;left:0;top:20px;left:16px">Sob Consulta</label>
+        </div>
+        <div class="col-1" *ngIf="!data.tipo_valor">
+          <mat-form-field>
+            <div>
+              <input matInput placeholder="Valor" formControlName="descricao" NumberOnly formControlName="valor"
+                required [disabled]='formEdit'>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="col-2" *ngIf='isDevolucao'>
+          <mat-form-field>
+            <mat-select placeholder="Depot" formControlName="id_depot" [disabled]='formEdit || false'>
+              <mat-option [value]='depot.id_depot' [innerHTML]='depot.nome' *ngFor='let depot of depots'></mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div [ngClass]="isDevolucao ? 'col-3' : 'col-2'">
+          <mat-form-field>
+            <mat-select placeholder="Margem" formControlName="id_margem" required [disabled]='formEdit'
+              (selectionChange)='margemChanged()'>
+              <mat-option [value]='margem.id_margem' [innerHTML]='margem.margem | titlecase' *ngFor='let margem of margens'>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class='col-4' *ngIf='isDevolucao'>
+          <app-regiao *ngIf='true' (outCidadeForm)='inCidade($event)'
+            (outCidadeNameSelected)='inCidadeNameSelectec($event)' [data]='data' [formEdit]='isLockedRegiao()'>
+          </app-regiao>
+        </div>
+      </div>
+
+      <div class='excluir' *ngIf='!formEdit'>
+        <mat-icon class='ico' matTooltip="Excluir" [id]="idx" (click)="removePredicado($event.target.id)">delete
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- {{formulario.value | json}} -->
+<!-- <button (click)='show()'>SHOW</button> -->

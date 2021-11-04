@@ -1,0 +1,153 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="50%">
+        <form class='mat-elevation-z8'>
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Comissionário</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]='formulario'>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <mat-select placeholder='Classificação' required
+                                                    formControlName='id_comissionariotipo' #comissionarioT
+                                                    (selectionChange)='getComissionarios()'
+                                                    [disabled]='formEdit'
+                                                    >
+                                                    <mat-option *ngFor='let tipo of comissionarioTipo'
+                                                        [value]='tipo.id_comissionariotipo'
+                                                        [innerHTML]='tipo.tipo | titlecase'></mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <mat-select placeholder='Comissionário'
+                                                    formControlName='id_comissionado' required
+                                                    [disabled]='formEdit'
+                                                    >
+                                                    <mat-option *ngFor='let comissionario of comissionarios'
+                                                        [innerHTML]='comissionario.nome'
+                                                        [value]='comissionario.id_individuo'>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <mat-select placeholder='Unidade de cobrança'
+                                                    formControlName='id_unicob' required #uniCob (selectionChange)='uniCobMask()'
+                                                    [disabled]='formEdit'
+                                                    >
+                                                    <mat-option *ngFor='let unicob of unidadeCobranca'
+                                                        [innerHTML]='unicob.legenda' [value]='unicob.id_unicob'>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="comissaoMask === 'moeda'">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <input matInput placeholder='Comissão' formControlName='valor_comissao'
+                                                    NumberOnly
+                                                    [readonly]='formEdit'
+                                                     >
+
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="comissaoMask === 'porcentagem'">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                  <input matInput placeholder='Comissão' formControlName='valor_comissao'
+                                                    NumberOnly
+                                                    [readonly]='formEdit'
+                                                    >
+                                                <!-- <input matInput placeholder='Comissão' formControlName='valor_comissao'
+                                                    NumberOnly currencyMask #currency
+                                                    [options]="{ align: 'left', prefix: '', suffix: '%', thousands: '.', decimal: '.', precision: '0'}"> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="comissaoMask === 'moeda'">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                  <mat-select placeholder='Aplicação' formControlName='appcob' [disabled]='formEdit'>
+                                                      <mat-option *ngFor='let appCob of appCobs' [innerHTML]='appCob.legenda | titlecase' [value]='appCob.id_comissionarioappcob'></mat-option>
+                                                  </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <mat-select placeholder='Status' required
+                                            formControlName='id_comissionariostatus'
+                                            [disabled]='formEdit'
+                                            >
+                                            <mat-option *ngFor="let comStatus of comissionarioStatus"
+                                                [innerHTML]='comStatus.status | titlecase'
+                                                [value]='comStatus.id_comissionariostatus'>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-button [disabled]="!formulario.valid" (click)="onSubmite()">SALVAR</button> -->
+                    <button mat-button [disabled]="!formulario.valid || formEdit" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="openDialog()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+
+    </div>
+</div>

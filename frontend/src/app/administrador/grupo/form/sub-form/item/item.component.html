@@ -1,0 +1,35 @@
+    
+    <span [innerHTML]='(modulo.nome || modulo.legend) | titlecase' class='title'></span>
+    <div *ngIf="option" class='wrap_checkbox'>
+        <div>
+            <span>D</span>
+        </div>
+        <div>
+            <mat-checkbox (click)="permission('d')"></mat-checkbox>
+        </div>
+    </div>
+    <div *ngIf="option" class='wrap_checkbox'>
+        <div>
+            <span>U</span>
+        </div>
+        <div>
+            <mat-checkbox (click)="permission('u')"></mat-checkbox>
+        </div>
+    </div>
+    <div *ngIf="option" class='wrap_checkbox'>
+        <div>
+            <span>R</span>
+        </div>
+        <div>
+            <mat-checkbox (click)="permission('r')"></mat-checkbox>
+        </div>
+    </div>
+    <div *ngIf="option" class='wrap_checkbox'>
+        <div>
+            <span>C</span>
+        </div>
+        <div>
+            <mat-checkbox (click)="permission('c')"></mat-checkbox>
+        </div>
+    </div>
+<!-- <button (click)='show()'>SHOW</button> -->

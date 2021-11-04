@@ -1,0 +1,23 @@
+{
+    "extends": "../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "app",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "app",
+            "kebab-case"
+        ],
+        "max-line-length": [true, 520],
+        "no-input-rename": false,
+        "no-non-null-assertion": false,
+        "forin": false,
+        "radix": false,
+        "css.validate": false
+    }
+}

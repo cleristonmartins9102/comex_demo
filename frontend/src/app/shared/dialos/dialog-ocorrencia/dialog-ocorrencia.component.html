@@ -1,0 +1,16 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="100%">
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]='formulario'>
+          <mat-form-field>
+            <textarea matInput placeholder="Ocorrência" formControlName='ocorrencia'></textarea>
+          </mat-form-field>
+          <button mat-button (click)="closeDialog()">Salvar</button>
+          <!-- <button mat-button (click)="closeDialog()">Cancelar</button> -->
+        </form>
+        <!-- {{formulario.value | json}} -->
+      </div>
+    </div>
+  </div>
+</div>

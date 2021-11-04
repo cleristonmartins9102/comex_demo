@@ -1,0 +1,128 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="50%">
+    <!-- {{formulario.value | json}} -->
+    <form [formGroup]="formulario" class='mat-elevation-z8'>
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Cadastro de Item Padrão</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-select placeholder='Serviço' formControlName='id_predicado' required>
+                    <mat-option *ngFor="let predicado of predicados" [innerHTML]='predicado.nome'
+                      [value]='predicado.id_predicado'></mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput placeholder="Prioridade" NumberOnly formControlName="prioridade" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-select placeholder='Modulo' formControlName='id_modulo' required disabled>
+                    <mat-option value='3'>Fatura</mat-option>
+                    <mat-option value='4'>Processo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-select placeholder='Condicionador' formControlName='id_itemclassificacao' required>
+                    <mat-option [value]='itemClassificao.id_itemclassificacao' *ngFor="let itemClassificao of itemClassificoes"
+                      [innerHTML]='itemClassificao.classificacao | titlecase'></mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-select placeholder='Unidade de Cobrança' formControlName='id_unicob'>
+                    <mat-option *ngFor="let uniCob of uniCobs" [innerHTML]='uniCob.legenda' [value]='uniCob.id_unicob'>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput placeholder="Valor" formControlName="valor" NumberOnly required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput placeholder="Apelido" formControlName="apelido" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput placeholder="Email" formControlName="email" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div> -->
+          <!-- <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input NumberOnly matInput placeholder="DDD" formControlName="ddd" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input NumberOnly matInput placeholder="Telefone" formControlName="telefone" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="dp1" placeholder="Desde" formControlName="data_contratado" required>
+                  <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                  <mat-datepicker #dp1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div> -->
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button [disabled]="!formulario.valid" (click)='onSubmite()'>SALVAR</button>
+          <button mat-button (click)='backPage()'>CANCELAR</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>
+{{formulario.value | json}}

@@ -1,0 +1,7 @@
+{
+  "eslint.nodePath": "",
+  "eslint.workingDirectories": [
+
+    "./back_node"
+  ],
+}

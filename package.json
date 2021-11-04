@@ -1,0 +1,16 @@
+{
+  "name": "portuario",
+  "version": "1.0.0",
+  "description": "Prototype Application for Comex",
+  "author": "Cleriston Martins",
+  "email": "cleriston.mari@gmail.com",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "npm run build && docker-compose up -d",
+    "down": "docker-compose down"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

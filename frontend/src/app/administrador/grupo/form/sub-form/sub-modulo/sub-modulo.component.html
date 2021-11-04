@@ -1,0 +1,13 @@
+<div class="wrap">
+  <div class='header'><span>Módulos</span></div>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let modulo of modulos" (click)='sendFilhos.emit(modulo)'>
+      <div>
+        <app-item 
+          [modulo]='modulo'
+        >
+        </app-item>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

@@ -1,0 +1,66 @@
+mat-card {
+    padding:0 0 24px 0;
+    text-align: center;    
+}
+
+mat-card-content,
+mat-card-action {
+    padding:24px;
+}
+
+mat-card-content, form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+mat-card-header {
+    background:#3b5998;
+}
+
+ico-wallet {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1; 
+  margin-right: 10px;
+}
+
+form {
+    box-shadow: none;
+}
+
+.mat-card-title {
+    line-height: 34px;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px #333;
+} 
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.form-container > * {
+    width: 100%;
+}
+
+.faturaWrap {
+  min-height: 300px;
+}
+
+  mat-radio-button {
+      margin-left:10px;
+  }
+
+  mat-radio-group{
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 2.125;
+    ;
+  }
+
+  .last {
+    margin-bottom:80px;
+  }

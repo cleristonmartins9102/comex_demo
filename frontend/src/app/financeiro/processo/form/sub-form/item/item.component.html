@@ -1,0 +1,65 @@
+<form [formGroup]="formulario">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+    <div fxFlex="2" fxLayoutAlign="center center" *ngIf="!formEdit">
+      <mat-icon class='ico' matTooltip="Excluir" [id]="111" #delete (click)="onClose()">delete</mat-icon>
+    </div>
+    <div fxFlex="30">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Predicado Serviço" formControlName="id_predicado" #empresaSelected (selectionChange)='setDimensao(empresaSelected)'
+          [disabled]="formEdit" required>
+          <mat-option [value]="item.id_predicado" [id]='item.dimensao' [innerHTML]="item.descricao" *ngFor="let item of itens">
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+          <input matInput placeholder="Quantidade" formControlName='qtd' NumberOnly (blur)='trackItem()' [readonly]='formEdit'>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <mat-select placeholder='Dimensão' formControlName='dimensao' required [disabled]="formEdit">
+          <mat-option value="20">20</mat-option>
+          <mat-option value="40">40</mat-option>
+          <mat-option value="ambos">Ambos</mat-option>
+          <mat-option value="nenhum">Nenhum</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input matInput [matDatepicker]="dp1" placeholder="Data Início" [readonly]="true" disabled
+          formControlName='dta_inicio' (dateChange)='trackItem()'>
+        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+        <mat-datepicker #dp1 [disabled]="formEdit"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxFlex="10">
+      <mat-form-field>
+        <input #input matInput [matDatepicker]="dp2" placeholder="Data Final" [readonly]="true" disabled
+          formControlName='dta_final' (dateChange)='calcPeriodo()'>
+        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+        <mat-datepicker #dp2 [disabled]="formEdit"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- <div fxFlex="9">
+      <mat-form-field>
+        <input matInput placeholder="Dias Consumo" formControlName='dias_consumido' [readonly]='true'/>
+      </mat-form-field>
+    </div> -->
+    <div fxFlex="5">
+      <mat-form-field>
+        <!-- <input matInput placeholder="Período" formControlName='periodo' NumberOnly (blur)='trackItem()'  [readonly]='periodoLock'> -->
+        <input matInput placeholder="Período" formControlName='periodo' NumberOnly (blur)='trackItem()' [readonly]='formEdit'>
+      </mat-form-field>
+    </div>
+    <!-- <div fxFlex="5">
+      <mat-form-field>
+        <input matInput placeholder="Valor Item" formControlName='valor_item'/>
+      </mat-form-field>
+    </div> -->
+  </div>
+</form>
+
+<!-- {{formulario.value | json}} -->

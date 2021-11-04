@@ -1,0 +1,28 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="100%">
+    <div class="row">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="ocorrencia">
+          <th mat-header-cell *matHeaderCellDef> Ocorrência </th>
+          <td mat-cell *matCellDef="let element">
+            <p>{{element.ocorrencia}}</p>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef> Criado Em </th>
+          <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="created_by">
+          <th mat-header-cell *matHeaderCellDef> Criado Por </th>
+          <td mat-cell *matCellDef="let element"> {{element.created_by | titlecase}}</td>
+        </ng-container>
+        <ng-container matColumnDef="modulo">
+          <th mat-header-cell *matHeaderCellDef> Modulo' </th>
+          <td mat-cell *matCellDef="let element"> {{element.modulo}}</td>
+        </ng-container> 
+        <tr mat-header-row *matHeaderRowDef="rowTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: rowTable"></tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="mat-elevation-z8">
+    <app-report
+        methodSearch="getAll" 
+        [structure]="data" 
+        module="empresa" 
+        appname="empresa" 
+        (formResponse)="menuResponse($event)"
+        title='lista de empresas'
+    >
+    </app-report>
+</div>

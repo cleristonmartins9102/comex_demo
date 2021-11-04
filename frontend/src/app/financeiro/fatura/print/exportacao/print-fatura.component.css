@@ -1,0 +1,80 @@
+
+table, tr, tbody, thead {
+    width:100%;
+}
+
+td, th, tr {
+    font-size: 10px;
+}
+
+div.itens th {
+    background: #ff9966
+}
+
+div.containeres_general {
+    margin-top:40px;
+    padding:25px 0;
+    border-top:1px solid  #cccccc;
+    border-bottom:1px solid  #cccccc;
+}
+
+div.containeres th {
+    background: #F5F5F5;
+}
+
+div.containeres {
+    margin:0 auto;
+    width: 400px;
+}
+
+div.containeres table.table_general {
+    border:1px solid #cccccc;
+    /* border-collapse:collapse; */
+}
+
+div.container_general {
+    width:100%;
+    display:block;
+}
+
+div.header {
+    width:100%;
+}
+
+div.header div.logo {
+    width:200px;
+    display:inline-block;
+    min-height: 100px;
+}
+
+div.header div.right_after_logo {
+    width:calc(100% - 200px);
+    display:inline-block;
+    min-height: 100px;
+    text-align: right
+}
+
+div.header div.right_after_logo div.info_business {
+    display: inline-block;
+    width:300px;
+}
+
+div.content {
+    margin-top:10px;
+}
+body {
+	line-height: 1;
+}
+
+* {
+    font-family: "Arial", sans-serif
+}
+
+td {
+    padding:0
+}
+
+.egend_fatura {
+   font-weight: bold;
+   font-size: 20px;
+}

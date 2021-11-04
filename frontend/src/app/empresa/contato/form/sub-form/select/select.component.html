@@ -1,0 +1,31 @@
+<form [formGroup]="formulario">
+  <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center">
+    <div fxFlex="2" fxLayoutAlign="center center">
+      <mat-icon class='ico' matTooltip="Excluir"  [id]="111" #delete (click)="onClose()">delete</mat-icon>
+    </div>
+    <div fxFlex="50">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Empresa" 
+          formControlName="id_coadjuvante" 
+          #empresaSelected
+          [disabled]="selectDisabled"
+          (selectionChange)="getContato(empresaSelected.value)"
+        >
+          <mat-option [value]="empresa.id_individuo" [innerHTML]="empresa.nome" *ngFor="let empresa of empresas | async"></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Email" 
+          formControlName="id_contato" 
+          (selectionChange)="emitForm()"
+          [disabled]="selectDisabled" 
+        >
+          <mat-option [value]="contato.id_contato" [innerHTML]="'(' + contato.nome + ') ' + contato.email" *ngFor="let contato of contatos | async"></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<!-- {{formulario.value | json}} -->

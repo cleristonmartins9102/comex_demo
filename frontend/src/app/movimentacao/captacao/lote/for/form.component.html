@@ -1,0 +1,46 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="50%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Lote</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row" *ngIf="formulario.get('id_captacaolote').value">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder='Número' readonly formControlName='numero'>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-sub-form-lote
+                                [dataReceive]='subFormData'
+                                [formFull]='formulario' 
+                                (sendForm)='receiveForm($event)'
+                                [formEdit]='formEdit'
+                            >
+                            </app-sub-form-lote>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button
+                        [disabled]="!formulario.valid || statusLegend === 'Cancelada' || statusLegend === 'cancelada' || formEdit"
+                        (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="show()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+    </div>
+</div>

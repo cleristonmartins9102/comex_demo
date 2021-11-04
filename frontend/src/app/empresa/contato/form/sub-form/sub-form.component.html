@@ -1,0 +1,26 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="expanded" [disabled]='expanderDisabled'>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Contato
+      </mat-panel-title>
+      <mat-panel-description>
+        Contatos do grupo {{grupo}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center">
+      <div fxFlex="100">  
+          <arm-select
+            *ngFor="let select of selects; let idx=index"
+            [id]="idx"
+            (sendForm)="forkForm($event)"
+            [receiveData]="select.data"
+            (selfDestroy)="destroy($event)"
+          ></arm-select>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end end" >
+        <mat-icon matTooltip="Adicionar predicado" (click)="addSelect()" class="ico">add_circle</mat-icon>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

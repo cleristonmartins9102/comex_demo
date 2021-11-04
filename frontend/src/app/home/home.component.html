@@ -1,0 +1,44 @@
+<nav class='navbar navbar-expand-lg navbar-light bg-light title' style='background: #6A1B32;'>
+    <a class="navbar-brand" href="#">Giag - Gestão integrada de armazenagem Gralsin</a>
+</nav>
+<div class="geral">
+    <div class='body'>
+        <div class="container text-center h-100">
+            <div class="row appTitle">
+                <div class="col">
+                    <div class="col-sm-2 text-center" routerLink="/financeiro/processo/lista"
+                        *ngIf="check('financeiro')">
+                        <span class='fin align-middle'></span>
+                        <span class='align-middle legend'>Financeiro</span>
+                    </div>
+                    <div class="col-sm-2 text-center" routerLink="/empresa" *ngIf="check('empresa')">
+                        <span class='empresa align-middle'></span>
+                        <span class='align-middle legend'>Empresa</span>
+                    </div>
+                    <div class="col-sm-2 text-center" routerLink="/comercial" *ngIf="check('comercial')">
+                        <span class='comercial align-middle'></span>
+                        <span class='align-middle legend'>Comercial</span>
+                    </div>
+
+                    <div class="col-sm-2 text-center" routerLink="/movimentacao/captacao/lista-mon"
+                        *ngIf="check('movimentacao')">
+                        <span class='captacao align-middle'></span>
+                        <span class='align-middle legend'>Movimentação</span>
+                    </div>
+                    <div class="col-sm-2 text-center" routerLink="/liberacao/liberacao/lista"
+                        *ngIf="check('liberacao')">
+                        <span class='liberacao align-middle'></span>
+                        <span class='align-middle legend'>Liberação</span>
+                    </div>
+                    <div class="col-sm-2 text-center" routerLink="/administrador/grupo/cadastro"
+                        *ngIf="check('administracao')">
+                        >
+                        <span class='administracao align-middle'></span>
+                        <span class='align-middle legend'>Administração</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

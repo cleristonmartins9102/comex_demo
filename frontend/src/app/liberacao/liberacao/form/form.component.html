@@ -1,0 +1,153 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Liberação</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- <div class="col-4" *ngIf="formEdit">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Número" [readonly]="true"
+                                                formControlName="numero">
+                                        </mat-form-field>
+                                    </div>
+                                </div> -->
+                                <div class="col-4">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Documento" formControlName='documento' [readonly]='formEdit'>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Captacao' required formControlName="id_captacao"
+                                                [disabled]="formEdit">
+                                                <mat-option [value]="captacao.id_captacao"
+                                                    *ngFor="let captacao of captacao | async"
+                                                    [innerHTML]='captacao.numero + " - " + captacao.bl'></mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Tipo Operação' formControlName='tipo_operacao' [disabled]='formEdit'>
+                                                <mat-option value='DDC'>DDC</mat-option>
+                                                <mat-option value='Desova'>Desova</mat-option>
+                                                <mat-option value='Carregamento CNTR'>Carregamento CNTR</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp1" placeholder="Data de recebimento"
+                                        [readonly]="true" disabled formControlName='dta_recebimento_doc'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp1 [disabled]="formEdit"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp2" placeholder="Data de liberação"
+                                        [readonly]="true" disabled formControlName='dta_liberacao'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp2 [disabled]="formEdit"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp3" placeholder="Data saída do terminal"
+                                        [readonly]="true" disabled formControlName='dta_saida_terminal'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 [disabled]="formEdit"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder='Referência Importador' formControlName='ref_importador' [readonly]='formEdit'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName='id_status' [disabled]='formEdit'>
+                                        <mat-option [value]='status.id_liberacaostatus'
+                                            [innerHTML]='status.status'
+                                            *ngFor="let status of status | async"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-container">
+                                <mat-form-field>
+                                   <input 
+                                        matInput 
+                                        placeholder='Valor da Mercadoria' 
+                                        NumberOnly 
+                                        formControlName='valor_mercadoria' 
+                                        currencyMask 
+                                        required
+                                        [readonly]='formEdit'
+                                    >
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-sub-form-liberacao 
+                                [documentoDirty]='checkFieldDocumentDirty()'
+                                [dataReceive] = 'subFormData'
+                                [formEdit]='formEdit'
+                                [view]='formView'
+                                (sendForm)='receiveForm($event)'
+                            >
+                            </app-sub-form-liberacao>
+                        </div>
+                    </div>
+                    <div class="row last">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                    <!-- <sub-form 
+                      class="sub-form"
+                      [receiveDataForm]="subFormData" 
+                      (responseFormValue)="receivedDataSubForm($event)"
+                  >
+                  </sub-form> -->
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formEdit" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+        <!-- <button (click)="show()">Show FOrm</button>-->
+        <!-- {{formulario.value | json}}  -->
+    </div>
+</div>

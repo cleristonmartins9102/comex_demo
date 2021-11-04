@@ -1,0 +1,10 @@
+<div class="mat-elevation-z8">
+  <app-report 
+    methodSearch="getAll" 
+    [structure]="data" 
+    module="comercial" 
+    appname="vendedor" 
+    (formResponse)="menuResponse($event)"
+    title='lista de vendedores'
+  ></app-report>
+</div>

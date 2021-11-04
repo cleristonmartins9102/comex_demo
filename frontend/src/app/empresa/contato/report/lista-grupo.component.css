@@ -1,0 +1,80 @@
+.header-blue {
+    background:#3b5998;
+}
+
+.tableList {
+    width:100%;
+}
+
+.img {
+    width: 100%;
+ }
+
+  .container {
+    min-height: 100%;
+    width: 100%;
+    /* background:red */
+  }
+
+  table {
+    width: 100%;height:100%
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .button-row button,
+.button-row a {
+  margin: 8px;
+  
+}
+.mat {
+  margin-top:80px
+}
+
+expansion-panel {
+  /* position: absolute; */
+  width:100%
+}
+
+span {
+  text-transform: capitalize
+}
+
+.mat-column-checkbox {
+  width:80px;
+}
+
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+
+.description {
+  padding: 16px;
+  width:900px;
+}
+
+
+  
+

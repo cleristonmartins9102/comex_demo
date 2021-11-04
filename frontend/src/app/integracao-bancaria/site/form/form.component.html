@@ -1,0 +1,178 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="50%">
+        <!-- {{formulario.value | json}} -->
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Cadastro de Site</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form class='mat-elevation-z8' [formGroup]="formulario">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" name='nome' placeholder="Nome"
+                                                formControlName='nome' required>
+                                            <mat-error
+                                                *ngIf="formulario.get('nome').touched && formulario.get('nome').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" NumberOnly (blur)='checkIfCnpjExist(cnpj.value)'
+                                                #cnpj maxlength="14" placeholder="CNPJ" formControlName='cnpj' required>
+                                            <mat-error
+                                                *ngIf="formulario.get('cnpj').touched && formulario.get('cnpj').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                            <mat-error *ngIf="formulario.get('cnpj').getError('cnpjExist')">CNPJ já
+                                                cadastrado!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="Endereço"
+                                                formControlName='endereco' required>
+                                            <mat-error
+                                                *ngIf="formulario.get('endereco').touched && formulario.get('endereco').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" NumberOnly placeholder="Número"
+                                                formControlName='numero'>
+                                            <mat-error
+                                                *ngIf="formulario.get('numero').touched && formulario.get('numero').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="Bairro" name='bairro'
+                                                formControlName='bairro'>
+                                            <mat-error
+                                                *ngIf="formulario.get('bairro').touched && formulario.get('bairro').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput type="text" NumberOnly placeholder="CEP" maxLength='8'
+                                                formControlName='cep'>
+                                            <mat-error
+                                                *ngIf="formulario.get('cep').touched && formulario.get('cep').getError('required')">
+                                                Campo Obrigatório!</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-regiao multiple='false' [data]='regiaoData' (outEstadoForm)='receiveEstadoForm($event)'
+                                (outCidadeForm)='receiveCidadeForm($event)'></app-regiao>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Categoria' required formControlName="id_categoria"
+                                        [disabled]='formEdit'>
+                                        <mat-option [value]="categoria.id_sitecategoria"
+                                            *ngFor="let categoria of categorias" [innerHTML]="categoria.categoria | titlecase">
+                                        </mat-option>
+                                        <mat-error
+                                            *ngIf="formulario.get('id_categoria').touched && formulario.get('id_categoria').getError('required')">
+                                            Campo Obrigatório!</mat-error>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName="status"
+                                        [disabled]='formEdit'>
+                                        <mat-option [value]="status.id_carteirastatus"
+                                            *ngFor="let status of statusLista" [innerHTML]="status.status | titlecase">
+                                        </mat-option>
+                                        <mat-error
+                                            *ngIf="formulario.get('status').touched && formulario.get('status').getError('required')">
+                                            Campo Obrigatório!</mat-error>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <div fxFlex="100%">
+                        <mat-card class="card carteiraCard">
+                            <mat-card-header class='subForm'>
+                                <ico-wallet></ico-wallet>
+                                <mat-card-title>Carteira Bancária</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <form action="" [formGroup]='formulario'>
+                                    <mat-form-field>
+                                        <mat-select matSelect multiple placeholder="Carteira(s)" formControlName='carteiras'>
+                                            <mat-option *ngFor='let carteira of carteiras'
+                                                [value]="carteira.id_carteira" [disabled]='carteira.in_use'>
+                                                {{carteira.nome}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions *ngIf="!attached">
+                <button mat-button [disabled]="!formulario.valid || formEdit" class='submit'
+                    (click)="onSubmite()">SALVAR</button>
+                <button mat-button (click)="backPage()">CANCELAR</button>
+            </mat-card-actions>
+        </mat-card>
+        <!-- <button (click)="show()">Show FOrm</button> -->
+        <!-- {{formulario.value | json}} -->
+    </div>
+</div>

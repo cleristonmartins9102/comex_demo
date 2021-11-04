@@ -1,0 +1,25 @@
+.ico {
+    cursor: pointer;
+}
+
+.mat-form-field {
+    width:100%;
+}
+
+span.title {
+    line-height: 48px; 
+}
+.mat-checkbox, .wrap_checkbox {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.mat-checkbox, .wrap_checkbox {
+    margin-left:3px;
+    float: right;
+}
+
+.wrap_checkbox {
+    width: 20px;
+    text-align: center;
+}

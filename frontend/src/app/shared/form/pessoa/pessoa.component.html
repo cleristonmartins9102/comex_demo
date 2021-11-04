@@ -1,0 +1,280 @@
+<div class="container">
+  <div class="card" alin style="border:1px solid #3b5998">
+    <div class="card-header text-white header-blue">
+      <span>Cadastro de Pessoa</span>
+    </div>
+    <div class="card-body">
+      <form action="" [formGroup]="formulario" (ngSubmit)="onSubmite()">
+        <div class="row tipoPessoa">
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" (click)="setCpf();" name="tipo" type="radio" value="PessoaFisica"
+                formControlName="tipo" [ngClass]="{'no-cursor': formEdit}" [disabled]='formEdit'>
+              <label class="form-check-label" for="">Pessoa Fisíca</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" (click)="setCnpj();" type="radio" name="tipo" value="PessoaJuridica"
+                formControlName="tipo" checked [ngClass]="{'no-cursor': formEdit}" [disabled]='formEdit'>
+              <label class="form-check-label" for="">Pessoa Jurídica</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="tipoJuri.cpf" formGroupName="pessoa">
+          <div class="col-md-6">
+            <div class="form-group" [ngClass]="{'has-error': ui.alert.idFound || verificaValidTouched('pessoa', 'cpf')}">
+              <label for="form_name" class="control-label font-weight-bold">CPF *</label>
+              <input NumberOnly (blur)="checkId($event)" (keypress)="idStatus()" id="form_name" type="text"
+                name="cpf" class="form-control" placeholder="CPF *" formControlName="cpf" [ngClass]="{'no-cursor': formEdit}" [readonly]="formEdit">
+              <span class="help-block with-errors" *ngIf="verificaValidErros('pessoa', 'cpf')">
+                <ul>
+                  <li *ngIf="verificaValidErros('pessoa', 'cpf').required">CPF obrigatório</li>
+                  <li *ngIf="verificaValidErros('pessoa', 'cpf').minlength">CPF inválido</li>
+                  <li *ngIf="verificaValidErros('pessoa', 'cpf').maxlength">CPF inválido</li>
+                </ul>
+              </span>
+              <span class="help-block with-errors">
+                <ul>
+                  <li *ngIf="ui.alert.idFound">CPF já cadastrado</li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('pessoa', 'rg')}">
+              <label for="" class="control-label font-weight-bold">RG *</label>
+              <input NumberOnly id="rg" type="text" name="rg" class="form-control" placeholder="RG *" [readonly]="formEdit" formControlName="rg">
+              <span class="help-block with-errors" *ngIf="verificaValidErros('pessoa', 'rg')">RG
+                obrigatório</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="tipoJuri.cnpj" formGroupName="pessoa">
+          <div class="col-md-6">
+            <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('pessoa', 'cnpj')}">
+              <label for="form_name" class="control-label font-weight-bold">CNPJ *</label>
+              <input NumberOnly (blur)="checkId($event)" (keypress)="idStatus()" id="form_name" type="text"
+                name="name" class="form-control" placeholder="CNPJ *" formControlName="cnpj" [ngClass]="{'no-cursor': formEdit}" [readonly]="formEdit">
+                <span class="help-block with-errors" *ngIf="verificaValidErros('pessoa', 'cnpj')">
+                  <ul>
+                    <li *ngIf="verificaValidErros('pessoa', 'cnpj').required">CNPJ obrigatório</li>
+                    <li *ngIf="verificaValidErros('pessoa', 'cnpj').minlength">CNPJ inválido</li>
+                    <li *ngIf="verificaValidErros('pessoa', 'cnpj').maxlength">CNPJ inválido</li>
+                  </ul>
+                </span>
+                <span class="help-block with-errors">
+                  <ul>
+                    <li *ngIf="ui.alert.idFound">CNPJ já cadastrado</li>
+                  </ul>
+                </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('pessoa', 'ie')}">
+              <label for="form_name" class="control-label font-weight-bold">Inscrição Estadual *</label>
+              <input NumberOnly type="text" name="ie" id="ie" class="form-control" placeholder="Inscrição Estadual"
+                formControlName="ie" [readonly]="formEdit">
+              <div class="help-block with-errors" *ngIf="verificaValidErros('pessoa', 'ie')">Insrição
+                estadual obrigatório</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col">
+                <div class="form-group" [ngClass]="{'has-error':verificaValidTouched('nome')}">
+                  <label for="nome" class="control-label font-weight-bold">Nome *</label>
+                  <input type="text" class="form-control" id="nome" name="nome" placeholder="Por favor digite o nome"
+                    formControlName="nome" [readonly]="formEdit"/>
+                  <span class="help-block has-error " *ngIf="verificaValidErros('nome')">Nome
+                    necessário</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row endereco" formGroupName="endereco">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'logradouro')}">
+                  <label for="endereco" class="control-label font-weight-bold">Endereço *</label>
+                  <input type="text" class="form-control" id="endereco" name="logradouro" placeholder="Digite o endereco"
+                    formControlName="logradouro" [readonly]="formEdit"/>
+                  <span class="help-block with-errors" *ngIf="verificaValidErros('endereco', 'logradouro')">Endereço
+                    necessário</span>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'numero')}">
+                  <label for="numero" class="control-label font-weight-bold">Número *</label>
+                  <input NumberOnly type="text" class="form-control" id="numero" name="numero" placeholder="Digite o numero"
+                    formControlName="numero" [readonly]="formEdit"/>
+                  <span class="help-block" *ngIf="verificaValidErros('endereco', 'numero')">Número
+                    necessário</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'cep')}">
+                  <label for="cep" class="control-label font-weight-bold">Cep *</label>
+                  <input NumberOnly type="text" class="form-control" id="cep" name="cep" placeholder="Digite o cep"
+                    formControlName="cep" [readonly]="formEdit"/>
+                  <!-- <div class="help-block" *ngIf="formulario.controls.endereco.controls.cep.errors && (formulario.controls.endereco.controls.cep.touched || formulario.controls.endereco.controls.cep.dirty)">Cep Necessario</div> -->
+                  <span class="help-block with-errors" *ngIf="verificaValidTouched('endereco', 'cep')">
+                    <ul>
+                      <li *ngIf="verificaValidTouched('endereco', 'cep').required">Cep necessário</li>
+                      <li *ngIf="verificaValidTouched('endereco', 'cep').minlength">Cep inválido</li>
+                      <li *ngIf="verificaValidTouched('endereco', 'cep').maxlength">Cep inválido</li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="complemento" class="control-label font-weight-bold">Complemento </label>
+                  <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Digite um complemento, se houver"
+                    formControlName="complemento" [readonly]="formEdit"/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'bairro')}">
+                  <label for="bairro" class="control-label font-weight-bold">Bairro *</label>
+                  <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro"
+                    formControlName="bairro" [readonly]="formEdit"/>
+                  <span class="help-block with-errors" *ngIf="verificaValidErros('endereco', 'bairro')">Bairro
+                    necessário</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'id_estado')}">
+                  <label for="estado" class="control-label font-weight-bold">Estado *</label>
+                  <select class="form-control" id="estado-select" (change)="getCidades(estado.value)" #estado formControlName="id_estado" [attr.disabled]="formEdit ? true : null">
+                    <option *ngFor="let estado of estados | async" [value]="estado.id_estado" [innerHTML]="estado.sigla"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('endereco', 'id_cidade')}">
+                  <label for="cidade" class="control-label font-weight-bold">Cidade *</label>
+                  <select class="form-control" id="estado-select" formControlName="id_cidade" [attr.disabled]="formEdit ? true : null">
+                    <option *ngFor="let cidade of cidades | async" [value]="cidade.id_cidade" [innerHTML]="cidade.nome"></option>
+                  </select>
+                  <span class="help-block with-errors" *ngIf="verificaValidErros('endereco', 'id_cidade')">Cidade
+                    necessário</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="{'has-error': verificaValidTouched('papel')}">
+                  <label class='control-label font-weight-bold'>Papel</label>
+                  <select name="" id="" multiple class="form-control" formControlName="papel" [attr.disabled]="formEdit ? true : null">
+                    <option value="nome" *ngFor="let papel of papeis" [value]="papel.id" [innerHtml]="papel.nome"></option>
+                  </select>
+                  <div class="help-block with-errors" *ngIf="verificaValidErros('papel')">Obrigatório
+                    pelo menos 1 papel.</div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-accordion>
+              <mat-expansion-panel [expanded]="formEdit" (click)="exp_close=true">
+                <mat-expansion-panel-header >
+                  <mat-panel-title>
+                    Contatos
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Contatos da empresa
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                  <mat-divider></mat-divider>
+                  <div class="col-12 no-padding" formArrayName="contatos">
+                    <div class="row" *ngFor="let item of getControl('contatos'); index as idx"
+                      [formGroupName]="idx">
+                      <div class="col-3">
+                        <div class="row">
+                          <div class="col-1 no-padding">
+                            <mat-icon class='vertical-center' [ngClass]="inUse(item) ? 'whithout_ico' : 'ico'" matTooltip='Exlcluir' [id]="idx" (click)="removeContato($event.target.id)">delete</mat-icon>
+                          </div>
+                          <div class="col-11 no-padding">
+                            <mat-form-field>
+                              <input matInput placeholder="Nome do Contato" formControlName="nome" required [readonly]='formEdit'>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <mat-form-field>
+                          <input matInput NumberOnly placeholder="DDI" formControlName="ddi" [readonly]='formEdit'>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-form-field>
+                          <input matInput NumberOnly placeholder="DDD" formControlName="ddd" [readonly]='formEdit'>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field>
+                          <input matInput NumberOnly placeholder="Telefone" formControlName="telefone" [readonly]='formEdit'>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-3">
+                        <mat-form-field>
+                          <input matInput placeholder="Email" formControlName="email" required [readonly]='formEdit'>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field>
+                          <mat-select placeholder="Classificação" formControlName="classificacao" required [disabled]='formEdit'>
+                            <mat-option *ngFor="let classificacao of classificacoes" [value]="classificacao.name"
+                              [innerHTML]="classificacao.name">
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class='ico_add' *ngIf='!formEdit'>
+                  <mat-icon matTooltip="Adicionar predicado" (click)="addContato()">add_circle</mat-icon>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+        <div class="row last-row">
+          <div class="col-1">
+            <button class="btn btn-primary" [disabled]="(!formulario.valid || ui.alert.idFound) || formEdit" type="submit">Salvar</button>
+          </div>
+          <button type="button" class="btn btn-secondary" routerLink="/empresa/empresa/lista">Cancelar</button>
+        </div>
+      </form>
+      <!-- <div class="alert alert-success text-center alert-dismissible fade show" *ngIf="ui.alert.statusPostPessoa" style="margin-top:10px">
+        <strong>Sucesso!</strong> Dados gravados.
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div> -->
+    </div>
+    <div></div>
+  </div>
+  <!-- <button (click)="show()">Form</button> -->
+</div>
+<!-- {{formulario.value | json}} -->

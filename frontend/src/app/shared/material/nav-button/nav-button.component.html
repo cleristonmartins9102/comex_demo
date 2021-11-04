@@ -1,0 +1,7 @@
+<button mat-button [matMenuTriggerFor]="menu" [innerHTML]='buttonsConfig.menu.legend | titlecase'
+ [ngStyle]="{'background': clicked ? 'rgba(0,0,0,0.2)' : null}"></button>
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
+  <div>
+    <sub-button [btnConfig]="subMenu" *ngFor="let subMenu of buttonsConfig.submenu"></sub-button>
+  </div>
+</mat-menu>

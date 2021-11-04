@@ -1,0 +1,42 @@
+<mat-accordion style='margin-bottom:30px'>
+  <mat-expansion-panel [expanded]="dataReceive">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Captação:{{dataReceive.captacao}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <div *ngIf="!dataReceive.isLote">
+        Itens do Processo
+        </div>
+        <div  *ngIf="dataReceive.isLote">
+          <span class='vm'>Valor da Mercadoria: </span><input matInput #currency currencyMask class='cif' [(ngModel)] ='dataReceive.valor_mercadoria'/>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout='row' fxLayoutAlign="start start">
+        <div fxFlex='100' style='border-bottom: 1px solid #007bff; margin-bottom: 40px;display:none'>
+            <mat-checkbox color='primary' matTooltip='Recálcular itens dependêntes.' #smartItem checked='false'>Smart Item</mat-checkbox>
+        </div>
+      </div>
+    <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center">
+      <div fxFlex="100">
+          <arm-item
+            *ngFor="let iten of selects; let idx=index"
+            [id]="idx"
+            (sendForm)="sendForm.emit($event)"
+            [receiveData]="iten.data"
+            [id_captacao]="dataReceive.captacao"
+            (selfDestroy)="destroy($event)"
+            [data]='data'
+            [itens]='allPredicados'
+            [smartItem]='smartItem'
+            [formEdit]='formEdit'
+          ></arm-item>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end" *ngIf="!formEdit">
+        <mat-icon matTooltip="Adicionar" (click)="addSelect()" class="ico">add_circle</mat-icon>
+    </div>
+    </div>    
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- {{documentos.value | json}} -->

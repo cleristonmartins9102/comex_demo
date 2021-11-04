@@ -1,0 +1,298 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="100%">
+        <!-- {{formulario.value | json}} -->
+        <form class='mat-elevation-z8' [formGroup]="formulario">
+            <mat-card class="card">
+                <mat-card-header>
+                    <mat-card-title>Cadastro de Captação</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Terminal de Redestinação' (selectionChange)='getPropostas()'
+                                        formControlName="id_terminal_redestinacao" [disabled]="formView">
+                                        <mat-option [value]="terminal.id_terminal"
+                                            *ngFor="let terminal of terminais | async"
+                                            [innerHTML]="terminal.terminal_nome | uppercase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Terminal Atracação' formControlName="id_terminal_atracacao"
+                                        [disabled]="formView">
+                                        <mat-option [value]="terminal.id_terminal"
+                                            *ngFor="let terminal of terminais | async"
+                                            [innerHTML]="terminal.terminal_nome | uppercase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6" *ngIf="formEdit || formView">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Número" [readonly]="true"
+                                                formControlName="numero">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-{{formEdit?6:12}}">
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <mat-select placeholder='Proposta' required formControlName="id_proposta"
+                                                [disabled]="formView">
+                                                <mat-option [value]="proposta.id_proposta" [ngClass]='{lockedCancelStatus: isInativatedProposta(proposta.status)}'
+                                                    *ngFor="let proposta of propostas"
+                                                    [innerHTML]='proposta.id_cliente + " - " + proposta.nome_cliente + " - " + proposta.numero'>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="Referência Importador" formControlName="ref_importador"
+                                        [readonly]="formView">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                   <mat-select placeholder='Agente de Carga' formControlName='id_agentedecarga'>
+                                       <mat-option [value]='agente.id_individuo' [innerHTML]='agente.nome' *ngFor="let agente of agentesDeCarga | async"></mat-option>
+                                   </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder="Despachante" formControlName="id_despachante"
+                                        [disabled]="formView">
+                                        <mat-option [value]="despachante.id_individuo"
+                                            *ngFor="let despachante of despachantes | async"
+                                            [innerHTML]='despachante.id_individuo + " - " + despachante.nome'>
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder="Porto" formControlName="id_porto" [disabled]="formView">
+                                        <mat-option [value]="porto.id_porto" *ngFor="let porto of portos | async"
+                                            [innerHTML]='(porto.nome | titlecase) + " - " + porto.cidade + "/" + porto.estado'>
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="Nome do navio" formControlName="nome_navio"
+                                        [readonly]="formView">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Transportadora' formControlName="id_transportadora"
+                                        [disabled]="formView">
+                                        <mat-option [value]="transportadora.id_individuo"
+                                            *ngFor="let transportadora of transportadoras | async"
+                                            [innerHTML]="transportadora.nome | uppercase"></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp1" placeholder="Data Prevista de atracação"
+                                        formControlName="dta_prevista_atracacao" value="" [readonly]='formView'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp1 [disabled]='formView'></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="dp3" placeholder="Data de atracação"
+                                        formControlName="dta_atracacao" [readonly]='formView'>
+                                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 [disabled]='formView'></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="HBL" formControlName="bl" [readonly]='formView'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="MBL" formControlName="mbl" [readonly]='formView'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="CH" formControlName="ch" [readonly]='formView'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="CM" formControlName="cm" [readonly]='formView'>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container">
+                                <mat-form-field>
+                                    <mat-select placeholder='Status' required formControlName="id_status"
+                                        [disabled]="formView">
+                                        <mat-option [value]="status.id_captacaostatus" [ngClass]='{lockedCancelStatus: whoCancelCaptacao(status.status)}'
+                                            *ngFor="let status of statusLista | async" [innerHTML]="status.status">
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row lineRadioGroupWrap">
+                        <div class="col-6">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">IMO</label>
+                                <mat-radio-group formControlName="imo">
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}">Sim</mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">Margem</label>
+                                <mat-radio-group formControlName="id_margem">
+                                    <mat-radio-button value="1" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}" checked>Direita</mat-radio-button>
+                                    <mat-radio-button value="2" color="primary" [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}">Esquerda</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row lineRadioGroupWrap lineRadioGroupWrap-last">
+                        <div class="col-3">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">Break Bulk</label>
+                                <mat-radio-group formControlName='break_bulk'>
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}" >Sim</mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">Carga Perigosa</label>
+                                <mat-radio-group formControlName='carga_perigosa'>
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}" >Sim</mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">Anvisa</label>
+                                <mat-radio-group formControlName='anvisa'>
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}" >Sim</mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-container" style="margin-top:20px;">
+                                <label for="" style="font-weight: bold">Mapa</label>
+                                <mat-radio-group formControlName='mapa'>
+                                    <mat-radio-button value="sim" color="primary"
+                                        [ngStyle]="{'pointer-events':formView ? 'none' : 'auto'}" >Sim</mat-radio-button>
+                                    <mat-radio-button value="nao" color="primary" checked>Não</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row lineRadioGroupWrap-last">
+                        <div class="col-6" *ngIf="formulario.get('break_bulk').value === 'sim'">
+                            <app-subform-break-bulk [formReceive]='formulario' [breakBulkData]='breakBulkData' >
+                                
+                            </app-subform-break-bulk>
+                        </div>
+                    </div>
+  
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-12">
+                            <app-sub-form class="sub-form" minimum="false" [receiveDataForm]="subFormDataContainer"
+                                (responseFormValue)="receivedDataSubFormContainer($event)" [subFormClose]="formEdit"
+                                [typeCall]="checkTypeCall()">
+                            </app-sub-form>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-12">
+                            <app-subform-mov-upload (sendDocumentos)='receiveDocumentos($event)' [selects]='documentos'>
+                            </app-subform-mov-upload>
+                        </div>
+                    </div>
+                    <div class="row last">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [disabled]="!formulario.valid || formView" (click)="onSubmite()">SALVAR</button>
+                    <button mat-button (click)="backPage()" [disabled]="formView">CANCELAR</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</div>
+
+<!-- {{formulario.value | json}} -->

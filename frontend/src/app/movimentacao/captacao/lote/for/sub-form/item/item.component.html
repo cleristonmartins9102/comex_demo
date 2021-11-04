@@ -1,0 +1,24 @@
+<form [formGroup]="formulario">
+  <div class='wrap'>
+    <div style='margin-bottom: 5px'>
+      <span *ngIf="receiveData?.legenda" style='font-size: 12px' [ngStyle]="{'color': receiveData?.legenda.color}">{{receiveData.legenda.legenda}}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexAlign="center">
+      <div fxFlex="2" fxLayoutAlign="center center" *ngIf="!formEdit">
+        <mat-icon class=' ico' matTooltip="Excluir" [id]="111" #delete (click)="onClose()" [ngClass]="{'deletar': false
+        }">delete</mat-icon>
+      </div>
+      <div fxFlex="90">
+        <mat-form-field>
+            <mat-select placeholder='Captação' formControlName='id_captacao' [disabled]='formEdit'>
+              <mat-option [disabled]='captacao?.selected' [value]='captacao.id_captacao' *ngFor="let captacao of captacoes" [innerHTML]='captacao.numero + ( captacao.bl ? " - " + captacao.bl : "" )'></mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    </div>
+    
+  </div>
+</form>
+<!-- <button (click)='show()'>SHOW</button> -->
+<!-- {{formulario.value | json}} -->
+<!-- <div>{{formattedMessage}}</div> -->

@@ -1,0 +1,14 @@
+<div class="wrap">
+  <div class='header'><span>Formulário</span></div>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let modulo of prepareOnlyForm(subModulos)" >
+        <app-item 
+          [modulo]='modulo'
+          (sendItem)='sendItem.emit($event)'
+          (removeItem)='removeItem.emit($event)'
+          option='true'
+        >
+        </app-item>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

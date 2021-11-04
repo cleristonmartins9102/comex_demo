@@ -1,0 +1,200 @@
+mat-card {
+    padding:0 0 24px 0;
+}
+
+mat-card-content,
+mat-card-action {
+    padding:24px;
+}
+
+mat-card-header {
+    background:#3b5998;
+}
+
+.mat-card-title {
+    line-height: 34px;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px #333;
+}
+
+.card {
+    margin-top: 40px;
+}
+
+mat-card {    
+    /* max-width: 80%;     */
+    margin: 2em auto;    
+    text-align: center;    
+}    
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+
+  mat-radio-button {
+      margin-left:10px;
+  }
+
+  mat-radio-group{
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 2.125;
+    ;
+  }
+
+  .last {
+    margin-bottom:80px;
+  }
+
+  .mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  mat-list-item:hover {
+    background:rgba(0,0,0,.03);
+  }
+
+  mat-list-item {
+      cursor:pointer;
+      min-width: 200px;
+      z-index:1;
+  }
+
+  mat-list-item-content {
+    z-index:0;
+  }
+
+  div.row:last-of-type {
+      margin-bottom:10px;
+  }
+
+  .ico {
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .text-align {
+      display:inline-block
+  }
+
+  .row, mat-form-field {
+      width:100%;
+  }
+
+  mat-list {
+      margin-bottom:40px;
+  }
+
+  .vertical-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  mat-card {
+    padding:0 0 24px 0;
+}
+
+mat-card-content,
+mat-card-action {
+    padding:24px;
+}
+
+mat-card-header {
+    background:#3b5998;
+}
+
+.mat-card-title {
+    line-height: 34px;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px #333;
+}
+
+.card {
+    margin-top: 40px;
+}
+
+mat-card {    
+    /* max-width: 80%;     */
+    margin: 2em auto;    
+    text-align: center;    
+}    
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  /* mat-form-field:first-of-type {
+      max-width: 50%;
+  }
+   */
+  mat-radio-button {
+      margin-left:10px;
+  }
+
+  mat-radio-group{
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 2.125;
+    ;
+  }
+
+  .ico_add {
+    text-align: right;
+    width:100%;
+    cursor: pointer;
+  }
+
+  .mat-card .mat-divider-horizontal {
+      position:relative;
+      margin-bottom:1.5em;
+  }
+
+  .no-padding {
+      padding:0;
+  }
+
+  .vertical-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ico {
+    cursor: pointer;
+  }
+  mat-expansion-panel-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  }
+
+  .mat-expansion-content {
+    padding-top:20px;
+  }
+
+  .trash{
+    max-width:20px;
+  }
+
+  .mat-pseudo-checkbox{
+    background-color: red;
+    }
+

@@ -1,0 +1,172 @@
+<ng-template #armazenagem>
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div fxFlex="100%">
+            <!-- {{formulario.value | json}} -->
+            <form class='mat-elevation-z8' [formGroup]="formulario">
+                <mat-card class="card">
+                    <mat-card-header>
+                        <mat-card-title>Fatura de Armazenagem</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Número" [readonly]="true"
+                                                    formControlName="numero" NumberOnly>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <mat-select placeholder='Processo' required
+                                                    formControlName="id_processo" [disabled]="formEdit">
+                                                    <mat-option [value]="processo.id_processo"
+                                                        *ngFor="let processo of processos | async"
+                                                        [innerHTML]='processo.processo_numero'>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-container">
+                                            <mat-form-field>
+                                                <mat-select placeholder='Status' required formControlName='id_status' #st [disabled]='formEdit'>
+                                                    <mat-option [value]='status.id_faturastatus'
+                                                        [innerHTML]='status.status'
+                                                        *ngFor="let status of status | async">
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='Valor' formControlName='valor' required NumberOnly [readonly]='true'
+                                            currencyMask [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }"
+                                            #currency
+                                            >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='CIF' NumberOnly [(value)]='cif' readonly 
+                                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                            #currency
+                                            >
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <div class="col-4" *ngIf="userNameCusto()">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='Valor Custo' require formControlName='valor_custo'
+                                            NumberOnly
+                                            currencyMask [options]="{ align: 'left', prefix: 'R$', thousands: '.', decimal: ',' }"
+                                            #currency
+                                            [readonly]='lock'
+                                        >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='NF' formControlName='nf' [readonly]='lock'>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='Margem de lucro' [value]='margem' readonly [ngStyle]="{'color': margem_color()}">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput placeholder='Fornecedor' [value]='fornecedor' readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="dp1" placeholder="Data Emissão"
+                                            [readonly]="true" [disabled]='formEdit' formControlName='dta_emissao' required>
+                                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp1 disabled="true"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="dp2" placeholder="Data Vencimento"
+                                            [readonly]="true" [disabled]='formEdit' formControlName='dta_vencimento' required>
+                                        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp2 [disabled]='lock'></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-container">
+                                    <mat-form-field>
+                                        <input matInput formControlName='captacao' placeholder="Captação" [readonly]='formEdit'>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <app-sub-form-fatura [dataReceive]='subFormData' [id_proposta]='proposta' [formFull]='formulario'
+                                    (sendForm)='receiveForm($event)' (sendItem)='changedItem()'
+                                >
+                                </app-sub-form-fatura>
+                            </div>
+                        </div>
+                        <div class="row" style='margin-top:40px'>
+                            <div class="col-12">
+                                <app-sub-form-arm-upload 
+                                    [dataReceive]='uploadFormData' 
+                                    (sendForm)='receiveForm($event)' 
+                                    (sendItem)='changedItem()'
+                                    [formReceive]='formulario'
+                                >
+                                </app-sub-form-arm-upload>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row last">
+                            <div class="col-12">
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button [disabled]="formEdit || !formulario.valid || statusLegend === 'Cancelada' || statusLegend === 'cancelada'" (click)="onSubmite()">SALVAR</button>
+                        <button mat-button (click)="backPage()">CANCELAR</button>
+                    </mat-card-actions>
+                </mat-card>
+            </form>
+            <!-- <button (click)="show()">Show FOrm</button> -->
+            <!-- {{formulario.value | json}} -->
+        </div>
+    </div>
+</ng-template>

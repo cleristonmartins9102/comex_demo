@@ -1,0 +1,58 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="acessos">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span style='color:#3f51b5;font-weight:500'>Permissões</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        Permissões de acesso
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center" fxLayoutGap="0.5%">
+        <div fxFlex="50%" class='wrap_modules' style='text-align: left'>
+            <!-- <app-aplicacao
+              [acessos]='acessos'
+              [aplicacoes]='aplicacoes'
+              (sendSubModulos)='receiveSubModulos($event)'
+              (sendSelectedApp)='selectedApp = $event'
+            ></app-aplicacao> -->
+            <app-aplicacao
+              [acessos]='acessos'
+              [aplicacoes]='aplicacoes'
+              (sendSelectedApp)='selectedApp = $event'
+            ></app-aplicacao>
+        </div>
+        <div fxFlex="50%" class='wrap_modules' style='text-align: left'>
+            <app-sub-modulo
+              [modulos]='selectedApp.modulos'
+              (sendFilhos)='selectedModule = $event'
+          ></app-sub-modulo>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center none" fxLayoutGap="10px" fxFlexAlign="center" fxLayoutGap="0.5%" class='subform'>
+          <div fxFlex="50%" style='text-align: left'>
+              <app-formulario
+               [subModulos]='selectedModule.sub'
+               [acessos]='currencyFilhosForm'
+               (sendItem)='receiveItem($event)'
+               (removeItem)='removeItem($event)'
+            ></app-formulario>
+          </div>
+          <div fxFlex="50%" style='text-align: left'>
+              <app-view
+               [subModulos]='selectedModule.sub'
+               [acessos]='currencyFilhosView'
+               (sendItem)='receiveItem($event)'
+               (removeItem)='removeItem($event)'
+            ></app-view>
+          </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end">
+        <!-- <mat-icon matTooltip="Adicionar" (click)="addSelect()" class="ico">add_circle</mat-icon> -->
+      </div>
+    </mat-card-content>
+  </mat-expansion-panel>
+</mat-accordion>
+<button (click)="show()">Show</button>
+<!-- {{formulario.value | json}} -->

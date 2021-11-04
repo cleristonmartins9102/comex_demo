@@ -1,0 +1,18 @@
+<div class='row'>
+  <div [ngClass]="'col-' + config?.estadoLen">
+    <mat-form-field>
+      <mat-select placeholder='Estado' [formControl]='estado' (selectionChange)='getCidade(true)' [disabled]='formEdit'>
+          <mat-option [value]="estado.id_estado" [innerHTML]='estado.nome' *ngFor="let estado of estados"></mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div [ngClass]="'col-' + config?.cidadeLen">
+    <mat-form-field>
+      <mat-select multiple placeholder='Cidade' [formControl]='cidade' [disabled]='!estado.value || formEdit' (selectionChange)='cidadeChanged()'>
+        <mat-option [value]="cidade.id_cidade" [innerHTML]='cidade.nome' *ngFor="let cidade of cidades"></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- <button (click)='show()'>Show</button> -->
+</div>
+

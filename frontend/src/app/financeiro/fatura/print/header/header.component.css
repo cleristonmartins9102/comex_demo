@@ -1,0 +1,26 @@
+
+div.header {
+    width:100%;
+}
+
+div.header div.logo {
+    width:200px;
+    display:inline-block;
+    min-height: 100px;
+}
+
+div.header div.right_after_logo {
+    width:calc(100% - 200px);
+    display:inline-block;
+    min-height: 100px;
+    text-align: right
+}
+
+div.header div.right_after_logo div.info_business {
+    display: inline-block;
+    width:600px;
+}
+
+div.info_business span {
+    font-size: 10px;
+}

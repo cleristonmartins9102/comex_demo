@@ -1,0 +1,10 @@
+<div class="wrap">
+    <div class='header'><span>Relatório</span></div>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let acesso of acessos | keyvalue" (click)='getSubModulos(acesso)'>
+        <div>
+          <app-item [modulo]='acesso.key'></app-item>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
