@@ -17,7 +17,7 @@
     * Proposal Clone
     * Generate Proposal Children
     * Generate Complement Invoice
-    * Automatic Calcule Finance
+    * Automatic Calculator Finance
     * Automatic Get Process Services
 
 > ## Libs and Tools
