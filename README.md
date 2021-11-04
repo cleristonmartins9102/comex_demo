@@ -1,4 +1,4 @@
-# This is an Application for manager Foregin Trade Bussiness prototype.
+# This is an Application for manager Foregin Trade Business prototype.
 <div align="center">
     <img src='./public/logo.png'></img>
 </div>
