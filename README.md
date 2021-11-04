@@ -1,6 +1,7 @@
 # This is an Application for manager Foregin Trade Bussiness prototype.
-
-<img src='./public/logo.png'></img>
+<center>
+    <img src='./public/logo.png'></img>
+</center>
 > ## Modules Included 
     1 - Finance (Calc of invoices)
     2 - Process (Automatic auto search services occurred on operation)
