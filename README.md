@@ -4,8 +4,8 @@
 </div>
 
 > ## Modules Included 
-    1 - Finance (Calc of invoices)
-    2 - Process (Automatic auto search services occurred on operation)
+    1 - Finance
+    2 - Process
     2 - Operational
     3 - Importation and Exportation (Captação) 
     4 - Bussiness(Partners, Costumers, Providers, Forwarding Agent) 
@@ -17,6 +17,8 @@
     * Proposal Clone
     * Generate Proposal Children
     * Generate Complement Invoice
+    * Automatic Calcule Finance
+    * Automatic Get Process Services
 
 > ## Libs and Tools
 * Angular 6
