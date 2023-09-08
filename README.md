@@ -1,4 +1,4 @@
-# This is an Application for manager Foregin Trade Business prototype.
+# This is an application for managing a Foreign Trade Business.
 <div align="center">
     <img src='./public/logo.png'></img>
 </div>
@@ -6,7 +6,7 @@
 > ## Modules Included 
     1 - Finance
     2 - Process
-    2 - Operational
+    2 - Operation
     3 - Importation and Exportation (Captação) 
     4 - Bussiness(Partners, Costumers, Providers, Forwarding Agent) 
     5 - Proposal
