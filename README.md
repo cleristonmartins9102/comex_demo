@@ -1,62 +1,75 @@
-# This is an Application for manager Foregin Trade Business prototype.
+# 🌍 Foreign Trade Management Prototype
+
 <div align="center">
-    <img src='./public/logo.png'></img>
+  <img src="./public/logo.png" alt="Logo" width="200" />
 </div>
 
-> ## Modules Included 
-    1 - Finance
-    2 - Process
-    2 - Operational
-    3 - Importation and Exportation (Captação) 
-    4 - Bussiness(Partners, Costumers, Providers, Forwarding Agent) 
-    5 - Proposal
-    6 - Cargo Release
-> ## Features
-    * Trackings Operational
-    * Trackings of Finance
-    * Proposal Clone
-    * Generate Proposal Children
-    * Generate Complement Invoice
-    * Automatic Calculator Finance
-    * Automatic Get Process Services
+This is a prototype application for managing **Foreign Trade Operations**, with dedicated modules for **Finance**, **Process Management**, **Import/Export**, and **Operational Control**.
 
-> ## Libs and Tools
-* Angular 6
-* Angular Material
-* Angular Form
-* NPM
-* Typescript
-* Git
-* Docker
-* Node
-* Nginx
-* Mysql
-* PHP
-* PHP Composer
-* Simplexlsx
-* Phpspreadsheet
-* Phpmailer
-* Slim-jwt-auth
-* Aws-sdk-php
+---
 
-> ## Language
- - Português
+## 🧩 Included Modules
 
+1. Finance  
+2. Process Management  
+3. Operations  
+4. Import & Export (Leads Management)  
+5. Business Management (Partners, Customers, Providers, Freight Forwarders)  
+6. Proposal Handling  
+7. Cargo Release  
 
-## Testing
-    - Make repository download
-    - Execute "NPM Start"
+---
 
-    **The script executes:**
-    1 - Install project dependences
-    2 - Build the frontend project
-    3 - Download docker images
-    4 - Prepare DataBase.
+## ⚙️ Main Features
 
-<a href='http://127.0.0.1:8080' target='_blank'>http://127.0.0.1:8080</a> <br>
-User: demo@fake.com.br <br>
-Secret: GRA@2019
+- Operational tracking  
+- Financial tracking  
+- Proposal cloning  
+- Generate proposal children  
+- Generate complement invoices  
+- Automatic financial calculator  
+- Auto-fetch process services  
 
+---
 
+## 🧰 Technologies & Tools
 
+**Frontend:**
+- Angular 6  
+- Angular Material  
+- Angular Forms  
+- TypeScript  
 
+**Backend:**
+- PHP  
+- Slim Framework  
+- Composer  
+- PHPSpreadsheet  
+- PHPMailer  
+- Slim-JWT-Auth  
+
+**Infrastructure:**
+- Docker  
+- Node.js  
+- Nginx  
+- MySQL  
+- AWS SDK for PHP  
+- Git  
+- NPM  
+
+---
+
+## 🌐 Language
+
+- Portuguese (Brazilian)
+
+---
+
+## 🧪 Getting Started
+
+To run the project locally:
+
+```bash
+git clone https://github.com/your-repo/your-project.git
+cd your-project
+npm start
